@@ -5,9 +5,9 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, Suspense } from 'react'
 import { logEvent } from '@/lib/analytics'
 
-// ─── Hardcoded as confirmed GA4 Measurement ID for smartmotorweb stream ──────
-// Stream: smartmotorweb · Stream ID: 13613893423 · Measurement ID: G-MB61CK4J5Z
-const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-MB61CK4J5Z'
+// ─── Hardcoded as confirmed GA4 Measurement ID ──────
+// Measurement ID: G-GVGJF27VMQ
+const GA_ID = 'G-GVGJF27VMQ'
 
 // ─── Page-view tracker — fires on every SPA route change ─────────────────────
 function GAPageTracker() {
