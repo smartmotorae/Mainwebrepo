@@ -204,10 +204,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <GoogleAnalytics />
       </head>
       <body className="antialiased" suppressHydrationWarning>
-        {/* Google Analytics 4 — GA_ID: G-MB61CK4J5Z */}
-        <GoogleAnalytics />
         {/* Google Tag Manager — ID: GTM-MN8BGVZ2 */}
         <GoogleTagManager gtmId="GTM-MN8BGVZ2" />
         <AuthProvider>
