@@ -208,10 +208,8 @@ export default function RootLayout({
       <body className="antialiased" suppressHydrationWarning>
         {/* Google Analytics 4 — GA_ID: G-MB61CK4J5Z */}
         <GoogleAnalytics />
-        {/* Google Tag Manager (Requires GTM ID from env) */}
-        {process.env.NEXT_PUBLIC_GTM_ID && (
-          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
-        )}
+        {/* Google Tag Manager — ID: GTM-MN8BGVZ2 */}
+        <GoogleTagManager gtmId="GTM-MN8BGVZ2" />
         <AuthProvider>
           <AdminModeProvider>
             <LanguageProvider>
