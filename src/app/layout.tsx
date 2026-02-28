@@ -91,7 +91,7 @@ export const metadata: Metadata = {
   },
   // Google Search Console verification — add your real tag from GSC here:
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    google: "stwV4Sr40HlxZrOcqA0TtqCOEAcssi4PRnPu5Ec8CFo",
   },
 };
 
