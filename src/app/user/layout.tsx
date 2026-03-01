@@ -1,8 +1,16 @@
 import { redirect } from 'next/navigation'
 import { getUserSession } from '@/lib/user-session'
 import { UserSidebar } from '@/components/user/user-sidebar'
+import { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
 
 export default async function UserLayout({
   children,

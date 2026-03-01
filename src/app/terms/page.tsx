@@ -1,5 +1,19 @@
 import { Navbar } from '@/components/v2/layout/navbar'
 import { Footer } from '@/components/v2/layout/footer'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Terms of Service | Smart Motor Auto Repair Abu Dhabi',
+    description: 'Terms and conditions for Smart Motor Auto Repair services in Abu Dhabi. Service warranty, booking policies, genuine parts commitment, and customer agreements.',
+    openGraph: {
+        title: 'Terms of Service | Smart Motor Auto Repair',
+        description: 'Service terms, warranty policies, and customer agreements for Smart Motor Abu Dhabi.',
+        url: 'https://smartmotor.ae/terms',
+    },
+    alternates: {
+        canonical: 'https://smartmotor.ae/terms',
+    },
+}
 
 export default function TermsPage() {
         return (

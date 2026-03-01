@@ -7,7 +7,20 @@ import { SmartTipsHero } from '@/components/v2/sections/smart-tips-hero'
 import { BookingForm } from '@/components/v2/sections/booking-form'
 import { Metadata } from 'next'
 
-// ... existing metadata ...
+export const metadata: Metadata = {
+    title: 'Smart Tips – Car Care & Maintenance Guides | Smart Motor Abu Dhabi',
+    description: 'Expert car care tips, maintenance guides, and automotive insights from Smart Motor Abu Dhabi. Learn about PPF, ceramic coating, engine care, and more for UAE drivers.',
+    openGraph: {
+        title: 'Smart Tips – Car Care & Maintenance Guides | Smart Motor',
+        description: 'Expert car care tips and maintenance guides from Abu Dhabi\'s trusted workshop.',
+        url: 'https://smartmotor.ae/smart-tips',
+        siteName: 'Smart Motor',
+        type: 'website',
+    },
+    alternates: {
+        canonical: 'https://smartmotor.ae/smart-tips',
+    },
+}
 
 export const revalidate = 3600
 

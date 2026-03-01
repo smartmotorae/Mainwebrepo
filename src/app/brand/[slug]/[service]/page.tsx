@@ -38,6 +38,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         title,
         description,
         keywords: `${brand.name} ${service.name} abu dhabi, ${brand.name} specialized repair uae, ${service.name} for ${brand.name}`,
+        openGraph: {
+            title,
+            description,
+            url: `https://smartmotor.ae/brand/${slug}/${serviceSlug}`,
+            siteName: 'Smart Motor',
+            type: 'website',
+        },
         alternates: {
             canonical: `https://smartmotor.ae/brand/${slug}/${serviceSlug}`,
         },

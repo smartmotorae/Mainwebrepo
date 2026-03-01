@@ -9,6 +9,12 @@ import { cn } from '@/lib/utils'
 export const metadata: Metadata = {
     title: 'UAE Automotive Regulations Guide | Compliance Intelligence Abu Dhabi',
     description: 'Expert technical guide to UAE car regulations. Window tinting limits (VLT), modified exhaust rules, RTA passing standards, and aesthetic modification laws.',
+    openGraph: {
+        title: 'UAE Automotive Regulations Guide | Smart Motor Abu Dhabi',
+        description: 'Window tinting limits, exhaust rules, RTA standards, and modification laws in the UAE.',
+        url: 'https://smartmotor.ae/hub/regulations',
+        siteName: 'Smart Motor',
+    },
     alternates: {
         canonical: 'https://smartmotor.ae/hub/regulations',
     },

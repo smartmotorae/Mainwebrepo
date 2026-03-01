@@ -25,8 +25,43 @@ export const metadata: Metadata = {
 }
 
 export default function ContactPage() {
+    const contactJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "AutoRepair",
+        name: "Smart Motor Auto Repair",
+        telephone: "+97125555443",
+        email: "service@smartmotor.ae",
+        url: "https://smartmotor.ae/contact",
+        address: {
+            "@type": "PostalAddress",
+            streetAddress: "M9, Musaffah Industrial Area",
+            addressLocality: "Abu Dhabi",
+            addressRegion: "Abu Dhabi",
+            addressCountry: "AE",
+        },
+        geo: {
+            "@type": "GeoCoordinates",
+            latitude: 24.4539,
+            longitude: 54.3773,
+        },
+        openingHoursSpecification: [{
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            opens: "08:00",
+            closes: "19:00",
+        }],
+        contactPoint: [{
+            "@type": "ContactPoint",
+            telephone: "+97125555443",
+            contactType: "customer service",
+            areaServed: "AE",
+            availableLanguage: ["English", "Arabic"],
+        }],
+    }
+
     return (
         <main className="min-h-screen bg-brand-bg">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }} />
 
             {/* Hero */}
             <section className="pb-20 relative overflow-hidden">

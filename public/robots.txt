@@ -2,5 +2,26 @@
 User-agent: *
 Allow: /
 
+# Block private/internal routes
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /user
+Disallow: /user/*
+Disallow: /dev
+Disallow: /dev/*
+Disallow: /api
+Disallow: /api/*
+Disallow: /auth
+Disallow: /booking
+Disallow: /booking/*
+Disallow: /sneakpeak
+Disallow: /new-home
+Disallow: /new-home/*
+Disallow: /design-system
+Disallow: /native-audio-demo
+
+# Allow specific API routes for bots
+Allow: /api/og
+
 # Sitemaps
 Sitemap: https://smartmotor.ae/sitemap.xml

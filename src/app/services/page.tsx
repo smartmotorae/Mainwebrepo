@@ -47,8 +47,33 @@ export default async function ServicesPage() {
         iconImage: undefined
     }))
 
+    const servicesJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Smart Motor Auto Repair Services",
+        description: "Full automotive services in Abu Dhabi: engine repair, AC service, electrical diagnostics, PPF installation, ceramic coating, window tinting & detailing.",
+        url: "https://smartmotor.ae/services",
+        numberOfItems: services.length,
+        itemListElement: services.map((s, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+                "@type": "Service",
+                name: s.name,
+                description: s.description,
+                url: `https://smartmotor.ae/services/${s.id}`,
+                provider: {
+                    "@type": "AutoRepair",
+                    name: "Smart Motor Auto Repair",
+                    url: "https://smartmotor.ae",
+                },
+            },
+        })),
+    }
+
     return (
         <main className="min-h-screen bg-brand-bg">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }} />
             <div>
                 <section className="py-24 text-center">
                     <div className="max-w-4xl mx-auto px-6">

@@ -2,7 +2,7 @@ import { google } from 'googleapis'
 
 const GSC_CLIENT_EMAIL = process.env.FIREBASE_CLIENT_EMAIL
 const GSC_PRIVATE_KEY = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n')
-const SITE_URL = process.env.SITE_URL || 'https://smartmotor.ae'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://smartmotor.ae'
 
 /**
  * Google Search Console API Wrapper

@@ -3,6 +3,14 @@ import { getAdminSession } from '@/lib/session'
 import { AdminSidebar } from '@/components/admin/admin-sidebar'
 import { MobileBottomNav } from '@/components/admin/mobile-bottom-nav'
 import { PresenceSync } from '@/components/admin/presence-sync'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
 
 export default async function AdminLayout({
   children,

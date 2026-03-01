@@ -3,6 +3,21 @@ import { Footer } from '@/components/v2/layout/footer'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ChevronRight, Sparkles, Wrench, Sun, Droplets, Activity, Mic, Disc, Droplet, TrendingUp, ThermometerSnowflake } from 'lucide-react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Interactive Car Tools & Simulators | Smart Motor Abu Dhabi',
+    description: 'Explore Smart Motor\'s interactive automotive tools: engine sound analyzer, tire safety lab, oil viscosity simulator, resale value AI, AC efficiency lab, tinting simulator and more.',
+    openGraph: {
+        title: 'Interactive Car Tools & Simulators | Smart Motor',
+        description: 'AI-powered automotive tools and interactive simulators from Smart Motor Abu Dhabi.',
+        url: 'https://smartmotor.ae/extras',
+        siteName: 'Smart Motor',
+    },
+    alternates: {
+        canonical: 'https://smartmotor.ae/extras',
+    },
+}
 
 const experimentals = [
     {

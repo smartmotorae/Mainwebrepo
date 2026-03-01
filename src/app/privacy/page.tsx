@@ -1,5 +1,19 @@
 import { Navbar } from '@/components/v2/layout/navbar'
 import { Footer } from '@/components/v2/layout/footer'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Privacy Policy | Smart Motor Auto Repair Abu Dhabi',
+    description: 'Smart Motor Auto Repair privacy policy. Learn how we collect, use, and protect your personal data and vehicle information at our Musaffah workshop.',
+    openGraph: {
+        title: 'Privacy Policy | Smart Motor Auto Repair',
+        description: 'How Smart Motor protects your personal data and vehicle information.',
+        url: 'https://smartmotor.ae/privacy',
+    },
+    alternates: {
+        canonical: 'https://smartmotor.ae/privacy',
+    },
+}
 
 export default function PrivacyPage() {
         return (

@@ -8,6 +8,12 @@ import Link from 'next/link'
 export const metadata: Metadata = {
     title: 'Precision Parts & World-Class Material Partners | Smart Motor Abu Dhabi',
     description: 'Smart Motor exclusively utilizes world-class brands like XPEL, Brembo, Mobil 1, and Michelin. Explore our matrix of technical partners providing elite car care in Abu Dhabi.',
+    openGraph: {
+        title: 'Precision Parts & Elite Material Partners | Smart Motor Abu Dhabi',
+        description: 'XPEL, Brembo, Mobil 1, Michelin and more. World-class brands for elite car care.',
+        url: 'https://smartmotor.ae/precision-parts',
+        siteName: 'Smart Motor',
+    },
     alternates: {
         canonical: 'https://smartmotor.ae/precision-parts',
     },

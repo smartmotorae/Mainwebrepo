@@ -8,6 +8,12 @@ import { cn } from '@/lib/utils'
 export const metadata: Metadata = {
     title: 'UAE Summer Safety Hub | Extreme Heat Car Maintenance Abu Dhabi',
     description: 'Protect your luxury vehicle from 50°C+ UAE summer heat. Expert technical tips for AC optimization, tire integrity, cooling systems, and battery health in Abu Dhabi.',
+    openGraph: {
+        title: 'UAE Summer Car Safety Hub | Smart Motor Abu Dhabi',
+        description: 'Protect your car from 50°C+ UAE summer heat. AC, tires, cooling & battery tips.',
+        url: 'https://smartmotor.ae/hub/summer-safety',
+        siteName: 'Smart Motor',
+    },
     alternates: {
         canonical: 'https://smartmotor.ae/hub/summer-safety',
     },

@@ -37,8 +37,25 @@ export default async function AboutPage() {
         slug: b.slug || b.id
     }))
 
+    const aboutJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        mainEntity: {
+            "@type": "AutoRepair",
+            "@id": "https://smartmotor.ae/#organization",
+            name: "Smart Motor Auto Repair",
+            foundingDate: "2009",
+            description: "Abu Dhabi's premier automotive service center since 2009. 50+ factory-certified technicians for German, Japanese, European & American vehicles.",
+            url: "https://smartmotor.ae",
+            numberOfEmployees: { "@type": "QuantitativeValue", value: 50 },
+            areaServed: { "@type": "City", name: "Abu Dhabi" },
+            knowsAbout: ["BMW Repair", "Mercedes Repair", "Porsche Repair", "Range Rover Repair", "Toyota Repair", "PPF Installation", "Ceramic Coating", "Window Tinting"],
+        },
+    }
+
     return (
         <main className="min-h-screen bg-brand-bg">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }} />
 
             {/* Hero Section */}
             <section className="pb-24 relative overflow-hidden">
