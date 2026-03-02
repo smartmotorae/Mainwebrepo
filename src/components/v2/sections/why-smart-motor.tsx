@@ -42,10 +42,10 @@ const features = [
 ]
 
 const images = [
-    { src: '/images/why-us/diagnostic.jpg', alt: 'Advanced Diagnostics', delay: 0 },
-    { src: '/images/why-us/lounge.jpg',     alt: 'Premium Lounge',       delay: 0.1 },
-    { src: '/images/why-us/team.jpg',       alt: 'Expert Team',          delay: 0.2 },
-    { src: '/images/why-us/parts.jpg',      alt: 'Genuine Parts',        delay: 0.3 },
+    { src: '/images/why-us/diagnostic.jpg', alt: 'Advanced car diagnostic equipment at Smart Motor Musaffah Abu Dhabi', delay: 0 },
+    { src: '/images/why-us/lounge.jpg',     alt: 'Premium customer lounge at Smart Motor Auto Repair Abu Dhabi',       delay: 0.1 },
+    { src: '/images/why-us/team.jpg',       alt: 'Expert certified automotive technicians at Smart Motor workshop',          delay: 0.2 },
+    { src: '/images/why-us/parts.jpg',      alt: 'Genuine OEM car spare parts inventory at Smart Motor Abu Dhabi',        delay: 0.3 },
 ]
 
 // CSS filter to tint any PNG to the brand red #E62329

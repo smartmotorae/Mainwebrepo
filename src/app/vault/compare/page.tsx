@@ -3,6 +3,21 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { VaultClient } from '@/components/hub/vault-client'
 import { Gauge, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Virtual Engineering Vault – Supercar Comparison Tool | Smart Motor Abu Dhabi',
+    description: 'Compare performance specs, features, and engineering details of the world\'s most elite supercars side-by-side. Powered by Smart Motor Abu Dhabi.',
+    openGraph: {
+        title: 'Virtual Engineering Vault – Supercar Comparison | Smart Motor',
+        description: 'Side-by-side technical comparison of the world\'s most elite supercars.',
+        url: 'https://smartmotor.ae/vault/compare',
+        siteName: 'Smart Motor',
+    },
+    alternates: {
+        canonical: 'https://smartmotor.ae/vault/compare',
+    },
+}
 
 export const dynamic = 'force-dynamic'
 

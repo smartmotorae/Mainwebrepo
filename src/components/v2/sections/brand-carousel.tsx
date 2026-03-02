@@ -22,7 +22,7 @@ function BrandSlot({ brand }: { brand: any }) {
                     {!imgError && (brand.logoUrl || brand.logoFile) ? (
                         <img
                             src={brand.logoUrl || `/brands-carousel/${brand.logoFile}`}
-                            alt={brand.name}
+                            alt={`${brand.name} car service and repair in Abu Dhabi`}
                             onError={() => setImgError(true)}
                             className="w-full h-full object-contain transition-all duration-700 group-hover:scale-110 [filter:drop-shadow(0_10px_10px_rgba(0,0,0,0.15))] hover:[filter:drop-shadow(0_15px_15px_rgba(0,0,0,0.25))]"
                             draggable={false}

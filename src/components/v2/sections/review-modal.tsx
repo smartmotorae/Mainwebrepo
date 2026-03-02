@@ -142,7 +142,7 @@ export function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                       <>
                         Post Review
                         <div className="flex items-center gap-1.5 ml-2 opacity-50 group-hover:opacity-100 transition-opacity">
-                          <img src="/google-logo.svg" alt="G" className="w-3 h-3 grayscale invert" />
+                          <img src="/google-logo.svg" alt="Post review to Google" className="w-3 h-3 grayscale invert" />
                           <Facebook size={12} className="fill-white" />
                         </div>
                       </>

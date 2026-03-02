@@ -47,8 +47,52 @@ export default async function SmartTipsPage() {
         }
     })
 
+    const blogJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        name: "Smart Tips – Car Care & Maintenance Guides",
+        description: "Expert car care tips, maintenance guides, and automotive insights from Smart Motor Abu Dhabi. Learn about PPF, ceramic coating, engine care, and more for UAE drivers.",
+        url: "https://smartmotor.ae/smart-tips",
+        publisher: {
+            "@type": "AutoRepair",
+            name: "Smart Motor Auto Repair",
+            url: "https://smartmotor.ae",
+            logo: {
+                "@type": "ImageObject",
+                url: "https://smartmotor.ae/branding/logo.png",
+            },
+        },
+        blogPost: posts.map(p => ({
+            "@type": "BlogPosting",
+            headline: p.title,
+            description: p.excerpt,
+            url: `https://smartmotor.ae/smart-tips/${p.slug}`,
+            datePublished: new Date((p.publishedAt || p.createdAt) as any).toISOString(),
+            author: {
+                "@type": "Organization",
+                name: "Smart Motor Auto Repair",
+            },
+        })),
+    }
+
+    const itemListJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Smart Motor Car Care Articles",
+        url: "https://smartmotor.ae/smart-tips",
+        numberOfItems: posts.length,
+        itemListElement: posts.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            url: `https://smartmotor.ae/smart-tips/${p.slug}`,
+            name: p.title,
+        })),
+    }
+
     return (
         <main className="min-h-screen bg-white">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
             <Navbar />
             <SmartTipsHero />
             <section className="py-24 bg-gray-50">

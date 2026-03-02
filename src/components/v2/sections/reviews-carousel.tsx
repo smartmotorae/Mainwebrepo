@@ -143,7 +143,7 @@ export function ReviewsCarousel() {
                             Elite Performance Sentiment
                         </span>
                         <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-brand-dark leading-none flex items-center gap-3">
-                            <img src="/google-logo.svg" alt="Google" className="h-8 md:h-12 object-contain" />
+                            <img src="/google-logo.svg" alt="Google Reviews for Smart Motor Auto Repair Abu Dhabi" className="h-8 md:h-12 object-contain" />
                             <span>Google <span className="text-brand-red">Reviews</span></span>
                         </h2>
                         <div className="flex items-center gap-3">
@@ -381,7 +381,7 @@ function ReviewCard({ review, isHero }: { review: Review; isHero: boolean }) {
 
                 <div className="flex items-center gap-3 pt-5 border-t border-white/10">
                     <div className="w-10 h-10 rounded-xl overflow-hidden bg-white/10 flex-shrink-0">
-                        <img src={review.avatar} alt={review.author} className="w-full h-full object-cover opacity-90" />
+                        <img src={review.avatar} alt={`${review.author} - verified Smart Motor customer review`} className="w-full h-full object-cover opacity-90" />
                     </div>
                     <div className="flex-1 min-w-0">
                         <h4 className="text-[11px] font-black text-white uppercase tracking-widest truncate">
@@ -392,7 +392,7 @@ function ReviewCard({ review, isHero }: { review: Review; isHero: boolean }) {
                                 Verified Client
                             </span>
                             <div className="flex items-center gap-1 bg-white rounded-full px-2 py-0.5 shadow-sm ml-auto">
-                                <img src="/google-logo.svg" alt="Google" className="w-3 h-3" />
+                                <img src="/google-logo.svg" alt="Google verified review" className="w-3 h-3" />
                                 <span className="text-[7px] text-gray-500 font-bold">{review.date}</span>
                             </div>
                         </div>

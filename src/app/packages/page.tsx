@@ -20,5 +20,57 @@ export const metadata: Metadata = {
 }
 
 export default function PackagesPage() {
-    return <PackagesPageClient />
+    const packagesJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "OfferCatalog",
+        name: "Smart Motor Car Protection Packages",
+        description: "Elite car protection solutions in Abu Dhabi including Paint Protection Film, Ceramic Coating, and Window Tinting with lifetime warranties.",
+        url: "https://smartmotor.ae/packages",
+        provider: {
+            "@type": "AutoRepair",
+            name: "Smart Motor Auto Repair",
+            url: "https://smartmotor.ae",
+            telephone: "+97125555443",
+            address: {
+                "@type": "PostalAddress",
+                streetAddress: "M9, Musaffah Industrial Area",
+                addressLocality: "Abu Dhabi",
+                addressRegion: "Abu Dhabi",
+                addressCountry: "AE",
+            },
+        },
+        itemListElement: [
+            {
+                "@type": "Offer",
+                name: "Premium Automotive Protection",
+                description: "Complete vehicle defense with lifetime warranty coverage, certified installation, and premium grade materials.",
+                url: "https://smartmotor.ae/packages#premium-protection",
+                availability: "https://schema.org/InStock",
+                areaServed: { "@type": "City", name: "Abu Dhabi" },
+            },
+            {
+                "@type": "Offer",
+                name: "Paint Protection Film (PPF)",
+                description: "Ultimate defense with lifetime warranty. Full body and front-end packages featuring self-healing technology, UV resistance, and high gloss or matte finishes.",
+                url: "https://smartmotor.ae/packages#ppf",
+                availability: "https://schema.org/InStock",
+                areaServed: { "@type": "City", name: "Abu Dhabi" },
+            },
+            {
+                "@type": "Offer",
+                name: "Premium Window Tinting",
+                description: "Up to 99% UV protection with high heat rejection. UAE-compliant shade options with 10-year warranty coverage.",
+                url: "https://smartmotor.ae/packages#window-tinting",
+                availability: "https://schema.org/InStock",
+                areaServed: { "@type": "City", name: "Abu Dhabi" },
+            },
+        ],
+    }
+
+    return (
+        <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(packagesJsonLd) }} />
+            <PackagesPageClient />
+        </>
+    )
 }

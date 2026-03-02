@@ -3,6 +3,19 @@ import Link from 'next/link'
 import { ChevronRight, ChevronDown, Folder, FileText, Globe, Shield, LayoutTemplate, Layers, Zap, BookOpen } from 'lucide-react'
 import { adminGetAllBrands, adminGetAllServices, adminGetAllPublishedContent } from '@/lib/firebase-admin'
 import { TreeClientWrapper } from './client-wrapper'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Site Architecture Tree | Smart Motor Abu Dhabi',
+    description: 'Live visualization of the Smart Motor programmatic SEO engine. Explore all brand, service, and content pages across the site.',
+    alternates: {
+        canonical: 'https://smartmotor.ae/tree',
+    },
+    robots: {
+        index: false,
+        follow: true,
+    },
+}
 
 // --- Types ---
 type TreeNode = {

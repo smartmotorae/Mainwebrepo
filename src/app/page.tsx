@@ -108,8 +108,88 @@ export default async function Home() {
         slug: b.slug || b.id
     }))
 
+    // JSON-LD: LocalBusiness + AutomotiveBusiness structured data
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': ['AutomotiveBusiness', 'AutoRepair'],
+        '@id': 'https://smartmotor.ae/#organization',
+        name: 'Smart Motor Auto Repair',
+        alternateName: 'Smart Motor',
+        url: 'https://smartmotor.ae',
+        logo: 'https://smartmotor.ae/images/logo.png',
+        image: 'https://smartmotor.ae/images/og-image.jpg',
+        description: "Abu Dhabi's trusted car workshop in Musaffah M9. Certified technicians, 6-month warranty. Mercedes, BMW, Audi, Land Rover & all brands.",
+        telephone: '+97125555443',
+        email: 'sales@smartmotor.ae',
+        foundingDate: '2009',
+        priceRange: '$$',
+        currenciesAccepted: 'AED',
+        paymentAccepted: 'Cash, Credit Card, Bank Transfer',
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'M9, Musaffah Industrial Area',
+            addressLocality: 'Abu Dhabi',
+            addressRegion: 'Abu Dhabi',
+            addressCountry: 'AE',
+        },
+        geo: {
+            '@type': 'GeoCoordinates',
+            latitude: 24.3539,
+            longitude: 54.4973,
+        },
+        areaServed: [
+            { '@type': 'City', name: 'Abu Dhabi' },
+            { '@type': 'Place', name: 'Musaffah' },
+            { '@type': 'Place', name: 'Khalifa City' },
+            { '@type': 'Place', name: 'Al Reem Island' },
+            { '@type': 'Place', name: 'Yas Island' },
+            { '@type': 'Place', name: 'Saadiyat Island' },
+        ],
+        openingHoursSpecification: [
+            {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Saturday'],
+                opens: '08:00',
+                closes: '19:00',
+            },
+        ],
+        sameAs: [
+            'https://www.facebook.com/smartmotorauto/',
+            'https://www.instagram.com/smartmotor_autorepair/',
+            'https://ae.linkedin.com/company/smartmotorauto',
+            'https://tiktok.com/@smartmotorae',
+            'https://threads.net/@smartmotor_autorepair',
+        ],
+        hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Auto Repair Services',
+            itemListElement: services.slice(0, 10).map((s, i) => ({
+                '@type': 'OfferCatalog',
+                name: s.name,
+                itemListElement: {
+                    '@type': 'Offer',
+                    itemOffered: {
+                        '@type': 'Service',
+                        name: s.name,
+                        url: `https://smartmotor.ae/services/${s.id}`,
+                    },
+                },
+            })),
+        },
+        aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.8',
+            reviewCount: '520',
+            bestRating: '5',
+        },
+    }
+
     return (
         <main className="min-h-screen bg-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <HomeCmsWrapper sectionId="home_hero" sectionName="Hero" initialData={heroCms}>
                 <Hero cmsData={heroCms} />
             </HomeCmsWrapper>

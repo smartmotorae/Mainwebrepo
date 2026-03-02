@@ -128,7 +128,7 @@ export function AdvancedLogoSlider({ brands: initialBrands }: { brands?: BrandIt
                                         <div className="flex items-center justify-center rounded-2xl bg-gray-50 border border-gray-100 shadow-sm group-hover:shadow-lg group-hover:border-gray-200 transition-all duration-300 w-20 h-20 md:w-24 md:h-24 p-4 md:p-5">
                                             <img
                                                 src={brand.src}
-                                                alt={brand.name}
+                                                alt={`${brand.name} car service and repair at Smart Motor Abu Dhabi`}
                                                 className="w-full h-full object-contain transition-all duration-500 group-hover:scale-110"
                                                 draggable={false}
                                             />

@@ -1,8 +1,7 @@
 import { Navbar } from '@/components/v2/layout/navbar'
 import { Footer } from '@/components/v2/layout/footer'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ChevronRight, Sparkles, Wrench, Sun, Droplets, Activity, Mic, Disc, Droplet, TrendingUp, ThermometerSnowflake } from 'lucide-react'
+import { ChevronRight, Wrench, Sun, Droplets, Activity, Mic, Disc, Droplet, TrendingUp, ThermometerSnowflake } from 'lucide-react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

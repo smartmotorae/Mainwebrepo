@@ -96,7 +96,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center group relative z-50">
             <img
               src={publicPath("/branding/logo.png")}
-              alt="Smart Motor"
+              alt="Smart Motor Auto Repair Abu Dhabi - Premium Car Service Center"
               className={cn(
                 'transition-all duration-500 object-contain',
                 isScrolled ? 'h-12 md:h-14' : 'h-16 md:h-20'

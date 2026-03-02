@@ -87,8 +87,45 @@ const SAFETY_MODULES = [
 ]
 
 export default function SummerSafetyPage() {
+    const summerSafetyJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: "UAE Summer Car Safety Guide – Extreme Heat Maintenance",
+        description: "Protect your luxury vehicle from 50°C+ UAE summer heat. Expert technical tips for AC optimization, tire integrity, cooling systems, and battery health in Abu Dhabi.",
+        url: "https://smartmotor.ae/hub/summer-safety",
+        datePublished: "2025-01-01",
+        dateModified: "2026-01-01",
+        author: {
+            "@type": "Organization",
+            name: "Smart Motor Auto Repair",
+            url: "https://smartmotor.ae",
+        },
+        publisher: {
+            "@type": "Organization",
+            name: "Smart Motor Auto Repair",
+            url: "https://smartmotor.ae",
+            logo: {
+                "@type": "ImageObject",
+                url: "https://smartmotor.ae/branding/logo.png",
+            },
+        },
+        mainEntityOfPage: "https://smartmotor.ae/hub/summer-safety",
+    }
+
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://smartmotor.ae" },
+            { "@type": "ListItem", position: 2, name: "Driver's Hub", item: "https://smartmotor.ae/hub" },
+            { "@type": "ListItem", position: 3, name: "Summer Safety", item: "https://smartmotor.ae/hub/summer-safety" },
+        ],
+    }
+
     return (
         <main className="min-h-screen bg-brand-bg">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(summerSafetyJsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
             <Navbar />
 
             {/* ── Hero ───────────────────────────────────────────────────────── */}

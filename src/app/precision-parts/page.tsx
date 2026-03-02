@@ -27,8 +27,46 @@ const CATEGORY_MAP = {
 }
 
 export default function PrecisionPartsPage() {
+    const precisionPartsJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "OfferCatalog",
+        name: "Precision Parts & World-Class Material Partners",
+        description: "Smart Motor exclusively utilizes world-class brands like XPEL, Brembo, Mobil 1, and Michelin for elite car care in Abu Dhabi.",
+        url: "https://smartmotor.ae/precision-parts",
+        provider: {
+            "@type": "AutoRepair",
+            name: "Smart Motor Auto Repair",
+            url: "https://smartmotor.ae",
+            telephone: "+97125555443",
+            address: {
+                "@type": "PostalAddress",
+                streetAddress: "M9, Musaffah Industrial Area",
+                addressLocality: "Abu Dhabi",
+                addressRegion: "Abu Dhabi",
+                addressCountry: "AE",
+            },
+        },
+        itemListElement: [
+            { "@type": "Offer", name: "Protection & Gloss", description: "Premium PPF, ceramic coating, and paint protection products from world-class brands.", availability: "https://schema.org/InStock" },
+            { "@type": "Offer", name: "Fluids & Lubricants", description: "Factory-approved engine oils, transmission fluids, and coolants from leading manufacturers.", availability: "https://schema.org/InStock" },
+            { "@type": "Offer", name: "Performance & Safety", description: "OEM-grade brake systems, suspension components, and safety equipment from premium brands.", availability: "https://schema.org/InStock" },
+            { "@type": "Offer", name: "Tires & Traction", description: "Premium tire brands optimized for UAE climate and driving conditions.", availability: "https://schema.org/InStock" },
+        ],
+    }
+
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://smartmotor.ae" },
+            { "@type": "ListItem", position: 2, name: "Precision Parts", item: "https://smartmotor.ae/precision-parts" },
+        ],
+    }
+
     return (
         <main className="min-h-screen bg-brand-bg technical-grid">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(precisionPartsJsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
             <Navbar />
 
             {/* ── Hero ───────────────────────────────────────────────────────── */}

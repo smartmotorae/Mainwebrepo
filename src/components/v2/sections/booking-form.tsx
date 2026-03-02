@@ -288,7 +288,7 @@ const BookingForm = forwardRef<HTMLDivElement>((_, ref) => {
                         {brands.map(brand => (
                             <div key={brand.id} onClick={() => { setValue('brand', brand.name); setExpandedBrand(brand.id); }} className="aspect-square bg-brand-dark carbon-fiber border border-white/5 rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer hover:border-brand-red/50 transition-all group">
                                 {brand.logoUrl || brand.logoFile ? (
-                                    <img src={brand.logoUrl || `/brands-carousel/${brand.logoFile}`} alt={brand.name} className="w-12 h-12 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
+                                    <img src={brand.logoUrl || `/brands-carousel/${brand.logoFile}`} alt={`${brand.name} car service booking at Smart Motor Abu Dhabi`} className="w-12 h-12 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
                                 ) : (
                                     <span className="font-black text-xs text-gray-500 group-hover:text-white uppercase tracking-wider">{brand.name.substring(0,3)}</span>
                                 )}

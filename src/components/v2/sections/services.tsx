@@ -84,7 +84,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                 <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
                         <img
                         src={getCategoryImage(service)}
-                        alt={service.name}
+                        alt={`${service.name} at Smart Motor Auto Repair Abu Dhabi`}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         onError={e => { (e.currentTarget as HTMLImageElement).src = '/images/services/mechanical.jpg' }}
                     />
@@ -97,7 +97,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                         <Tooltip content={service.name} position="right">
                             <div className="w-13 h-13 w-12 h-12 bg-brand-red/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-brand-red border border-brand-red/20 group-hover:bg-brand-red group-hover:text-white transition-all duration-500 shadow-lg p-2">
                                 {service.iconImage
-                                    ? <img src={publicPath(service.iconImage)} alt={service.name} className="w-full h-full object-contain drop-shadow-md group-hover:brightness-0 group-hover:invert transition-all" />
+                                    ? <img src={publicPath(service.iconImage)} alt={`${service.name} icon - Smart Motor Abu Dhabi`} className="w-full h-full object-contain drop-shadow-md group-hover:brightness-0 group-hover:invert transition-all" />
                                     : <Icon size={20} />}
                             </div>
                         </Tooltip>

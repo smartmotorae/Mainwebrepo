@@ -128,7 +128,7 @@ export default async function AboutPage() {
                             </div>
                         </div>
                         <div className="flex-1 w-full aspect-square rounded-[3rem] overflow-hidden shadow-2xl relative group">
-                            <img src="/images/ui/workshop-hero.webp" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Workshop" />
+                            <img src="/images/ui/workshop-hero.webp" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Smart Motor Auto Repair workshop interior at Musaffah M9 Abu Dhabi with professional car service equipment" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             <div className="absolute bottom-10 left-10 text-white">
                                 <p className="text-xs font-black uppercase tracking-widest mb-2 text-brand-red">Live Operations</p>

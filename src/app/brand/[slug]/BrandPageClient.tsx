@@ -67,7 +67,215 @@ export default function BrandPageClient({ slug }: BrandPageClientProps) {
             accentColor: '#005A2B',
             description: 'Mastering the art of luxury off-roading. Specialized air suspension repair and terrain response calibration for Abu Dhabi\'s elite fleet.',
             models: ['Range Rover', 'Range Rover Sport', 'Defender', 'Discovery', 'Velar', 'Evoque']
-        }
+        },
+        'toyota': {
+            name: 'Toyota',
+            logo: '/brands/toyota.png',
+            banner: '/images/hero/toyota-banner.webp',
+            accentColor: '#EB0A1E',
+            description: 'Abu Dhabi\'s most trusted name in reliability deserves precision care. From Land Cruiser V8 overhauls to Camry hybrid servicing, we keep Toyota\'s legendary durability intact.',
+            models: ['Land Cruiser', 'Camry', 'RAV4', 'Hilux', 'Prado', 'Corolla', 'Fortuner', 'Yaris']
+        },
+        'nissan': {
+            name: 'Nissan',
+            logo: '/brands/nissan.png',
+            banner: '/images/hero/nissan-banner.webp',
+            accentColor: '#C3002F',
+            description: 'From the legendary Patrol to the innovative Leaf, our Nissan specialists deliver factory-grade servicing with a focus on VQ engine performance and CVT reliability.',
+            models: ['Patrol', 'Altima', 'X-Trail', 'Pathfinder', 'Kicks', 'Maxima', 'GT-R', '370Z']
+        },
+        'lexus': {
+            name: 'Lexus',
+            logo: '/brands/lexus.png',
+            banner: '/images/hero/lexus-banner.webp',
+            accentColor: '#8B0000',
+            description: 'Japanese luxury redefined. Our Lexus technicians are trained on the full hybrid powertrain ecosystem — from the LS flagship to the performance-oriented LC 500.',
+            models: ['LS', 'ES', 'IS', 'RX', 'LX', 'NX', 'GX', 'LC 500']
+        },
+        'lamborghini': {
+            name: 'Lamborghini',
+            logo: '/brands/lamborghini.png',
+            banner: '/images/hero/lamborghini-banner.webp',
+            accentColor: '#FFD700',
+            description: 'Sant\'Agata precision meets Musaffah expertise. We handle Huracan V10 servicing, Urus performance tuning, and Aventador carbon-ceramic brake systems with surgical care.',
+            models: ['Huracan', 'Urus', 'Aventador', 'Revuelto']
+        },
+        'rolls-royce': {
+            name: 'Rolls-Royce',
+            logo: '/brands/rolls-royce.png',
+            banner: '/images/hero/rolls-royce-banner.webp',
+            accentColor: '#7B3F61',
+            description: 'The ultimate expression of automotive luxury. Our Rolls-Royce specialists maintain the hand-crafted perfection of Ghost, Phantom, and Cullinan with the reverence they deserve.',
+            models: ['Ghost', 'Phantom', 'Cullinan', 'Wraith', 'Dawn', 'Spectre']
+        },
+        'bentley': {
+            name: 'Bentley',
+            logo: '/brands/bentley.png',
+            banner: '/images/hero/bentley-banner.webp',
+            accentColor: '#2C3E2D',
+            description: 'Crewe craftsmanship preserved in Abu Dhabi. We service the Continental GT\'s W12 powerplant, Bentayga\'s air suspension, and Flying Spur\'s bespoke electronics.',
+            models: ['Continental GT', 'Bentayga', 'Flying Spur']
+        },
+        'ferrari': {
+            name: 'Ferrari',
+            logo: '/brands/ferrari.png',
+            banner: '/images/hero/ferrari-banner.webp',
+            accentColor: '#DC143C',
+            description: 'Maranello engineering demands Maranello-level care. Our Ferrari technicians handle F1 dual-clutch gearboxes, mid-engine cooling systems, and Manettino calibration with exacting precision.',
+            models: ['488', 'F8 Tributo', 'Roma', 'SF90', 'Portofino', '296 GTB', '812 Superfast']
+        },
+        'maserati': {
+            name: 'Maserati',
+            logo: '/brands/maserati.png',
+            banner: '/images/hero/maserati-banner.webp',
+            accentColor: '#003366',
+            description: 'Italian grand touring excellence maintained in Abu Dhabi. Specialist care for Ghibli, Levante, and Quattroporte — including Skyhook suspension and twin-turbo V6/V8 service.',
+            models: ['Ghibli', 'Levante', 'Quattroporte', 'MC20', 'GranTurismo', 'Grecale']
+        },
+        'volkswagen': {
+            name: 'Volkswagen',
+            logo: '/brands/volkswagen.png',
+            banner: '/images/hero/volkswagen-banner.webp',
+            accentColor: '#001E50',
+            description: 'German engineering for everyone — but not every workshop understands VW\'s TSI turbo systems and DSG dual-clutch transmissions. Our specialists do.',
+            models: ['Golf', 'Tiguan', 'Touareg', 'Passat', 'Arteon', 'T-Roc', 'ID.4']
+        },
+        'honda': {
+            name: 'Honda',
+            logo: '/brands/honda.png',
+            banner: '/images/hero/honda-banner.webp',
+            accentColor: '#CC0000',
+            description: 'Precision engineering from Minato meets Abu Dhabi\'s demanding conditions. From VTEC engine servicing to i-MMD hybrid maintenance, we keep your Honda performing at its peak.',
+            models: ['Civic', 'Accord', 'CR-V', 'HR-V', 'Pilot', 'City']
+        },
+        'hyundai': {
+            name: 'Hyundai',
+            logo: '/brands/hyundai.png',
+            banner: '/images/hero/hyundai-banner.webp',
+            accentColor: '#002C5F',
+            description: 'Korea\'s automotive powerhouse requires modern expertise. Our Hyundai technicians are trained on GDi turbo engines, HTRAC AWD systems, and SmartSense safety calibration.',
+            models: ['Tucson', 'Santa Fe', 'Sonata', 'Elantra', 'Palisade', 'Creta', 'Kona']
+        },
+        'kia': {
+            name: 'Kia',
+            logo: '/brands/kia.png',
+            banner: '/images/hero/kia-banner.webp',
+            accentColor: '#05141F',
+            description: 'Kia\'s award-winning design and engineering deserve specialist attention. From Telluride SUV servicing to EV6 electric platform care, we cover the full Kia range.',
+            models: ['Telluride', 'Sportage', 'Sorento', 'K5', 'Carnival', 'EV6', 'Seltos']
+        },
+        'ford': {
+            name: 'Ford',
+            logo: '/brands/ford.png',
+            banner: '/images/hero/ford-banner.webp',
+            accentColor: '#003478',
+            description: 'Built Ford Tough — maintained Smart Motor Tough. From EcoBoost turbo engines to Raptor off-road systems, we handle Ford\'s full performance range with American muscle expertise.',
+            models: ['Explorer', 'Mustang', 'F-150 Raptor', 'Expedition', 'Bronco', 'Edge', 'Escape']
+        },
+        'chevrolet': {
+            name: 'Chevrolet',
+            logo: '/brands/chevrolet.png',
+            banner: '/images/hero/chevrolet-banner.webp',
+            accentColor: '#D4A017',
+            description: 'American automotive heritage maintained with precision. From Tahoe V8 servicing to Corvette performance calibration, our technicians understand GM engineering inside out.',
+            models: ['Tahoe', 'Suburban', 'Corvette', 'Camaro', 'Silverado', 'Blazer', 'Equinox']
+        },
+        'gmc': {
+            name: 'GMC',
+            logo: '/brands/gmc.png',
+            banner: '/images/hero/gmc-banner.webp',
+            accentColor: '#CC0000',
+            description: 'Professional grade deserves professional service. Our GMC specialists handle Yukon Denali, Sierra, and Terrain with full diagnostic capability for Duramax diesel and AT4 systems.',
+            models: ['Yukon', 'Yukon Denali', 'Sierra', 'Terrain', 'Acadia', 'Canyon']
+        },
+        'cadillac': {
+            name: 'Cadillac',
+            logo: '/brands/cadillac.png',
+            banner: '/images/hero/cadillac-banner.webp',
+            accentColor: '#8B7355',
+            description: 'American luxury at its finest. Escalade V8 performance, CT5-V Blackwing tuning, and MagneRide suspension calibration — handled with the precision Cadillac demands.',
+            models: ['Escalade', 'CT5', 'CT4', 'XT5', 'XT6', 'Lyriq']
+        },
+        'jaguar': {
+            name: 'Jaguar',
+            logo: '/brands/jaguar.png',
+            banner: '/images/hero/jaguar-banner.webp',
+            accentColor: '#006747',
+            description: 'British performance and luxury combined. From F-Type supercharged V8 servicing to I-PACE electric platform maintenance, we deliver Jaguar-grade care in Abu Dhabi.',
+            models: ['F-Type', 'F-PACE', 'E-PACE', 'XF', 'XE', 'I-PACE']
+        },
+        'volvo': {
+            name: 'Volvo',
+            logo: '/brands/volvo.png',
+            banner: '/images/hero/volvo-banner.webp',
+            accentColor: '#003057',
+            description: 'Swedish safety engineering maintained in Abu Dhabi. Our Volvo specialists handle Drive-E powertrains, City Safety calibration, and Pilot Assist semi-autonomous driving systems.',
+            models: ['XC90', 'XC60', 'XC40', 'S90', 'S60', 'V60 Cross Country']
+        },
+        'dodge': {
+            name: 'Dodge',
+            logo: '/brands/dodge.png',
+            banner: '/images/hero/dodge-banner.webp',
+            accentColor: '#BA0C2F',
+            description: 'American muscle demands expert handling. Our technicians specialize in HEMI V8 performance tuning, SRT calibration, and Hellcat supercharger maintenance for Dodge vehicles.',
+            models: ['Challenger', 'Charger', 'Durango', 'Hornet']
+        },
+        'jeep': {
+            name: 'Jeep',
+            logo: '/brands/jeep.png',
+            banner: '/images/hero/jeep-banner.webp',
+            accentColor: '#3A5F0B',
+            description: 'Trail Rated performance maintained for Abu Dhabi\'s diverse terrain. From Wrangler Rubicon off-road systems to Grand Cherokee luxury electronics, we service the full Jeep lineup.',
+            models: ['Wrangler', 'Grand Cherokee', 'Gladiator', 'Compass', 'Renegade']
+        },
+        'infiniti': {
+            name: 'Infiniti',
+            logo: '/brands/infiniti.png',
+            banner: '/images/hero/infiniti-banner.webp',
+            accentColor: '#1A1A2E',
+            description: 'Japanese luxury with performance DNA. Our Infiniti specialists handle VR30 twin-turbo V6 engines, Direct Adaptive Steering, and ProActive suspension with factory-level expertise.',
+            models: ['QX80', 'QX60', 'QX55', 'QX50', 'Q50', 'Q60']
+        },
+        'genesis': {
+            name: 'Genesis',
+            logo: '/brands/genesis.png',
+            banner: '/images/hero/genesis-banner.webp',
+            accentColor: '#1C2B4A',
+            description: 'Korea\'s luxury revolution maintained with premium care. Genesis G90, G80, and GV80 servicing with full twin-turbo and HTRAC AWD diagnostic capability.',
+            models: ['G90', 'G80', 'G70', 'GV80', 'GV70', 'GV60']
+        },
+        'mitsubishi': {
+            name: 'Mitsubishi',
+            logo: '/brands/mitsubishi.png',
+            banner: '/images/hero/mitsubishi-banner.webp',
+            accentColor: '#ED1C24',
+            description: 'Reliability and adventure capability maintained at Smart Motor. From Pajero off-road systems to Outlander PHEV hybrid servicing, we handle the full Mitsubishi range.',
+            models: ['Pajero', 'Outlander', 'ASX', 'L200', 'Eclipse Cross', 'Montero Sport']
+        },
+        'mazda': {
+            name: 'Mazda',
+            logo: '/brands/mazda.png',
+            banner: '/images/hero/mazda-banner.webp',
+            accentColor: '#910000',
+            description: 'Jinba Ittai — the unity of horse and rider. Our Mazda specialists understand Skyactiv technology, Kodo design philosophy, and the precision engineering behind every Mazda model.',
+            models: ['CX-5', 'CX-9', 'CX-30', 'Mazda3', 'Mazda6', 'MX-5']
+        },
+        'peugeot': {
+            name: 'Peugeot',
+            logo: '/brands/peugeot.png',
+            banner: '/images/hero/peugeot-banner.webp',
+            accentColor: '#003DA5',
+            description: 'French automotive innovation maintained in Abu Dhabi. Our Peugeot specialists handle PureTech turbo engines, EAT8 automatic transmissions, and i-Cockpit diagnostic systems.',
+            models: ['3008', '5008', '2008', '508', '308', '208']
+        },
+        'mini-cooper': {
+            name: 'MINI Cooper',
+            logo: '/brands/mini-cooper.png',
+            banner: '/images/hero/mini-cooper-banner.webp',
+            accentColor: '#2D6A4F',
+            description: 'British icon with BMW engineering precision. Our MINI specialists handle TwinPower Turbo engines, ALL4 AWD systems, and John Cooper Works performance upgrades.',
+            models: ['Cooper', 'Countryman', 'Clubman', 'John Cooper Works']
+        },
     }
 
     const brand = brands[slug] || {
@@ -180,7 +388,7 @@ export default function BrandPageClient({ slug }: BrandPageClientProps) {
                                 <div className="flex -space-x-3">
                                     {[1,2,3].map(i => (
                                         <div key={i} className="w-10 h-10 rounded-full border-2 border-brand-dark bg-gray-800 flex items-center justify-center overflow-hidden">
-                                            <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="User" />
+                                            <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt={`Satisfied ${brand.name} owner serviced at Smart Motor Abu Dhabi`} />
                                         </div>
                                     ))}
                                 </div>

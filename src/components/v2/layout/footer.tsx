@@ -9,7 +9,8 @@ import {
     WhatsAppIcon,
     FacebookIcon,
     TikTokIcon,
-    ThreadsIcon
+    ThreadsIcon,
+    LinkedInIcon
 } from '@/components/ui/icons'
 import { TrackedLink } from '@/components/ui/tracked-link'
 import { publicPath } from '@/lib/utils'
@@ -56,7 +57,7 @@ export function Footer() {
                         <Link href="/" className="inline-block mb-8">
                             <img
                                 src={publicPath("/branding/logo.png")}
-                                alt="Smart Motor"
+                                alt="Smart Motor Auto Repair Musaffah Abu Dhabi - Car Service Workshop Logo"
                                 className="h-20 w-auto object-contain"
                             />
                         </Link>
@@ -88,6 +89,11 @@ export function Footer() {
                                 <a href="https://threads.net/@smartmotor_autorepair" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
                                     <ThreadsIcon size={16} />
                                 </a>
+                            </Tooltip>
+                            <Tooltip content="LinkedIn" position="top">
+                                <TrackedLink href="https://ae.linkedin.com/company/smartmotorauto" source="footer" medium="social" campaign="linkedin" label="linkedin-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
+                                    <LinkedInIcon size={16} />
+                                </TrackedLink>
                             </Tooltip>
                         </div>
                     </div>

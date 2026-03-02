@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Navbar } from '@/components/v2/layout/navbar'
 import { Footer } from '@/components/v2/layout/footer'
-import { motion } from 'framer-motion'
 import { Phone, MapPin, Clock, Mail, MessageCircle, Navigation, ChevronRight } from 'lucide-react'
 import { BookingForm } from '@/components/v2/sections/booking-form'
 import { GoogleMapView } from './contact-client'

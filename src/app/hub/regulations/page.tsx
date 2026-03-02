@@ -28,8 +28,45 @@ const CATEGORY_MAP = {
 }
 
 export default function RegulationsPage() {
+    const regulationsJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: "UAE Automotive Regulations Guide – Compliance Intelligence",
+        description: "Expert technical guide to UAE car regulations. Window tinting limits (VLT), modified exhaust rules, RTA passing standards, and aesthetic modification laws.",
+        url: "https://smartmotor.ae/hub/regulations",
+        datePublished: "2025-01-01",
+        dateModified: "2026-01-01",
+        author: {
+            "@type": "Organization",
+            name: "Smart Motor Auto Repair",
+            url: "https://smartmotor.ae",
+        },
+        publisher: {
+            "@type": "Organization",
+            name: "Smart Motor Auto Repair",
+            url: "https://smartmotor.ae",
+            logo: {
+                "@type": "ImageObject",
+                url: "https://smartmotor.ae/branding/logo.png",
+            },
+        },
+        mainEntityOfPage: "https://smartmotor.ae/hub/regulations",
+    }
+
+    const breadcrumbJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://smartmotor.ae" },
+            { "@type": "ListItem", position: 2, name: "Driver's Hub", item: "https://smartmotor.ae/hub" },
+            { "@type": "ListItem", position: 3, name: "UAE Regulations", item: "https://smartmotor.ae/hub/regulations" },
+        ],
+    }
+
     return (
         <main className="min-h-screen bg-brand-bg">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(regulationsJsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
             <Navbar />
 
             {/* ── Hero ───────────────────────────────────────────────────────── */}
@@ -141,6 +178,37 @@ export default function RegulationsPage() {
                     >
                         Book Technical Audit
                     </Link>
+                </div>
+            </section>
+
+            {/* ── UAE Government Authority Links ──────────────────────────────── */}
+            <section className="py-12 bg-white border-t border-gray-100">
+                <div className="max-w-7xl mx-auto px-6 md:px-12">
+                    <h3 className="text-sm font-black text-brand-dark uppercase tracking-widest mb-6">Official UAE Regulatory Resources</h3>
+                    <div className="flex flex-wrap gap-4 text-xs font-bold text-gray-500">
+                        <a href="https://www.moi.gov.ae" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">
+                            UAE Ministry of Interior
+                        </a>
+                        <span className="text-gray-300">|</span>
+                        <a href="https://dot.abudhabi.ae" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">
+                            Abu Dhabi Dept. of Transport
+                        </a>
+                        <span className="text-gray-300">|</span>
+                        <a href="https://www.moiat.gov.ae" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">
+                            ESMA Vehicle Standards (MOIAT)
+                        </a>
+                        <span className="text-gray-300">|</span>
+                        <a href="https://www.rta.ae" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">
+                            Dubai Roads & Transport Authority
+                        </a>
+                        <span className="text-gray-300">|</span>
+                        <a href="https://u.ae/en/information-and-services/justice-safety-and-the-law/road-safety/traffic-fines-and-violations" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">
+                            UAE Official Traffic Violations
+                        </a>
+                    </div>
+                    <p className="mt-4 text-[10px] text-gray-400 font-medium">
+                        Information sourced from official UAE government publications. Regulations may change — always verify directly with the relevant authority before modifying your vehicle.
+                    </p>
                 </div>
             </section>
 

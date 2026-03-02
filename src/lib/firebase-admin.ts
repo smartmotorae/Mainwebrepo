@@ -198,6 +198,20 @@ export async function adminGetAllPublishedContent(type?: string): Promise<BlogPo
 }
 
 
+export async function adminGetContentBySlug(slug: string): Promise<{ id: string; title: string; content: string; recommendedService?: string; category?: string; excerpt?: string; published?: boolean } | null> {
+  const db = getAdminDb()
+  if (!db) return null
+  try {
+    // Content docs use slug as document ID
+    const doc = await db.collection('content').doc(slug).get()
+    if (!doc.exists) return null
+    return serializeDoc({ id: doc.id, ...doc.data() }) as any
+  } catch (error) {
+    console.error(`adminGetContentBySlug error for ${slug}:`, error)
+    return null
+  }
+}
+
 export async function adminGetContentBlock(key: string) {
   const db = getAdminDb()
   if (!db) return null

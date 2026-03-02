@@ -26,7 +26,7 @@ export function ServiceDetailClient({ service }: ServiceDetailClientProps) {
                     <div className="absolute inset-0 bg-black/60 z-10" />
                     <img
                         src={service.image || '/bg-placeholder.jpg'}
-                        alt={service.name}
+                        alt={`${service.name} at Smart Motor Auto Repair Abu Dhabi`}
                         className="w-full h-full object-cover"
                     />
                 </div>
