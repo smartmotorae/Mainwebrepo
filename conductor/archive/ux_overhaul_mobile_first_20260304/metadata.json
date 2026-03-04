@@ -1,0 +1,8 @@
+{
+  "track_id": "ux_overhaul_mobile_first_20260304",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-03-04T12:00:00Z",
+  "updated_at": "2026-03-04T12:00:00Z",
+  "description": "the hero section logo carousel needs to be auto alide animating loop and then on hiver the tooltip is being overlapped by components which needs to be on top of all in z index. and every page must be like its created for mobie 1st when it comes in mobile so i want you to plan that up for each and every pages and components and everything including the portales and dashboards afetr login. and i need a entire list of images that appears and thei dimentions cause currently its stock imahges so i need this list to prepare them and each placeholder when you listing describe the ideal image which will suit acordingly to the content. again make sure each and every contacts, addresses and links, handles all are legit smartmotors. every interaction, feedbacks, error handleing, everything must be in place micro reactions on hover to give a rich experience"
+}
