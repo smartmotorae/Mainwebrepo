@@ -12,12 +12,19 @@
 | track-008 | Build Stabilization | Completed | ./archive/build_stabilization_20260223/ |
 | track-009 | Authority Partners Showcase | Completed | ./archive/authority_partners_20260223/ |
 | track-010 | UAE Regulations Guide | Completed | ./archive/regulations_guide_20260223/ |
+| track-012 | Unified Auth Cleanup | Completed | ./tracks/track-012/ |
+| track-013 | UX & Mobile-First Overhaul | New | ./tracks/ux_overhaul_mobile_first_20260304/ |
 
 *Link: [./archive/uae_intel_vault_20260223/](./archive/uae_intel_vault_20260223/)*
 
 ---
 
-- [~] **Track: Systematic Codebase Audit & Technical Debt Cleanup (Purging Obsolete Files, Consolidating Technical Implementation, Orphaned Component Scan).**
+- [ ] **Track: Platform-Wide UX Overhaul & Mobile-First Optimization (Logo Carousel, Z-Index, Global Mobile-First Refactoring, Image Audit, Data Legitimacy, and Rich Interactions).**
+*Link: [./tracks/ux_overhaul_mobile_first_20260304/](./tracks/ux_overhaul_mobile_first_20260304/)*
+
+---
+
+- [ ] **Track: Systematic Codebase Audit & Technical Debt Cleanup (Purging Obsolete Files, Consolidating Technical Implementation, Orphaned Component Scan).**
 *Link: [./tracks/cleanup_audit_20260223/](./tracks/cleanup_audit_20260223/)*
 
 ---
@@ -29,6 +36,11 @@
 
 - [~] **Track: Authority Brands & Technical Partners Showcase (Showcasing Precision Parts & World-Class Material Partners).**
 *Link: [./archive/authority_partners_20260223/](./archive/authority_partners_20260223/)*
+
+---
+
+- [~] **Track: Unified Authentication System Cleanup & Implementation (Consolidating session management, standardizing cookies, and finalizing role-based access for Users and Admins).**
+*Link: [./tracks/track-012/](./tracks/track-012/)*
 
 
 
