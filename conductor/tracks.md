@@ -13,13 +13,13 @@
 | track-009 | Authority Partners Showcase | Completed | ./archive/authority_partners_20260223/ |
 | track-010 | UAE Regulations Guide | Completed | ./archive/regulations_guide_20260223/ |
 | track-012 | Unified Auth Cleanup | Completed | ./tracks/track-012/ |
-| track-013 | UX & Mobile-First Overhaul | New | ./tracks/ux_overhaul_mobile_first_20260304/ |
+| track-013 | UX & Mobile-First Overhaul | Completed | ./tracks/ux_overhaul_mobile_first_20260304/ |
 
 *Link: [./archive/uae_intel_vault_20260223/](./archive/uae_intel_vault_20260223/)*
 
 ---
 
-- [ ] **Track: Platform-Wide UX Overhaul & Mobile-First Optimization (Logo Carousel, Z-Index, Global Mobile-First Refactoring, Image Audit, Data Legitimacy, and Rich Interactions).**
+- [x] **Track: Platform-Wide UX Overhaul & Mobile-First Optimization (Logo Carousel, Z-Index, Global Mobile-First Refactoring, Image Audit, Data Legitimacy, and Rich Interactions).**
 *Link: [./tracks/ux_overhaul_mobile_first_20260304/](./tracks/ux_overhaul_mobile_first_20260304/)*
 
 ---
