@@ -138,52 +138,7 @@ function getUniqueContent(brand: Brand, service: Service, brandData: typeof BRAN
 
     const uniqueContent = serviceContent[service.slug] || defaultContent
 
-    return (
-        <div className="space-y-16">
-            <div className="prose prose-lg max-w-none">
-                <p className="text-xl text-gray-600 leading-relaxed font-medium">
-                    At Smart Motor Abu Dhabi, we understand that your {brand.name} is an intricate piece of {origin} engineering. Our specialized {service.name.toLowerCase()} is designed to address the specific vulnerabilities of your vehicle in the extreme UAE climate, utilizing OEM parts and dealer-level diagnostics.
-                </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-                <div className="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-red/20 transition-all duration-500 group">
-                    <div className="flex items-center gap-5 mb-8">
-                        <div className="w-14 h-14 rounded-full bg-brand-dark flex items-center justify-center text-white font-black text-2xl group-hover:bg-brand-red transition-colors duration-500 shadow-lg">1</div>
-                        <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark italic">The Challenge</h3>
-                    </div>
-                    <p className="text-gray-600 leading-relaxed text-lg">{uniqueContent.challenges}</p>
-                </div>
-                
-                <div className="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-red/20 transition-all duration-500 group">
-                    <div className="flex items-center gap-5 mb-8">
-                        <div className="w-14 h-14 rounded-full bg-brand-red flex items-center justify-center text-white font-black text-2xl group-hover:bg-brand-dark transition-colors duration-500 shadow-lg">2</div>
-                        <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark italic">Our Approach</h3>
-                    </div>
-                    <p className="text-gray-600 leading-relaxed text-lg">{uniqueContent.approach}</p>
-                </div>
-            </div>
-
-            <div className="bg-brand-dark p-12 rounded-[3rem] relative overflow-hidden group">
-                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay"></div>
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-[120px] opacity-20 transition-transform duration-1000 group-hover:scale-110" style={{ background: brandData?.accentColor || '#E62329' }} />
-                
-                <div className="relative z-10">
-                    <div className="flex items-center gap-4 mb-8">
-                        <ShieldCheck className="text-brand-red w-10 h-10" />
-                        <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-white italic">Why It Matters in Abu Dhabi</h3>
-                    </div>
-                    <p className="text-gray-300 leading-relaxed text-xl md:text-2xl font-medium max-w-4xl">{uniqueContent.uaeContext}</p>
-                </div>
-            </div>
-
-            <div className="bg-white p-10 md:p-14 rounded-[3rem] border border-gray-100 shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-2 h-full bg-brand-red"></div>
-                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-brand-dark mb-6 italic">The Technical Process</h3>
-                <p className="text-gray-600 leading-relaxed text-lg">{uniqueContent.technicalProcess}</p>
-            </div>
-        </div>
-    )
+    return uniqueContent
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string, service: string }> }): Promise<Metadata> {

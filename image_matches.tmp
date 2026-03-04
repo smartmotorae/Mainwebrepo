@@ -1,0 +1,86 @@
+src/app/brand/[slug]/BrandPageClient.tsx:                    <img
+src/app/brand/[slug]/BrandPageClient.tsx:                                <img src={brand.logo} alt={brand.name} className="object-contain" />
+src/app/brand/[slug]/BrandPageClient.tsx:                                            <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt={`Satisfied ${brand.name} owner serviced at Smart Motor Abu Dhabi`} />
+src/app/brand/[slug]/BrandPageClient.tsx:                                                <img src={brand.logo} alt={brand.name} className="object-contain" />
+src/app/brand/[slug]/BrandPageClient.tsx:                                            <img
+src/app/brand/[slug]/[service]/page.tsx:                                    <img 
+src/app/brand/[slug]/[service]/page.tsx:                                    <img src={b.logoUrl} alt={`${b.name} ${service.name} Abu Dhabi`} className="w-5 h-5 object-contain" />
+src/app/admin/tools/image-resizer/page.tsx:  const [images, setImages]       = useState<ImageFile[]>([])
+src/app/admin/tools/image-resizer/page.tsx:  const [globalFmt, setGlobalFmt] = useState<ImageFile['format']>('jpeg')
+src/app/admin/tools/image-resizer/page.tsx:          <ImageIcon className="w-6 h-6 text-brand-red" />
+src/app/admin/tools/image-resizer/page.tsx:                  <img src={img.src} alt={img.name} className="w-12 h-12 rounded-lg object-cover flex-shrink-0 border border-gray-100" />
+src/app/admin/tools/image-resizer/page.tsx:                : <><ImageIcon size={15} />Resize All</>}
+src/app/admin/tools/qr-code/page.tsx:                                            <img src={item.code} alt="QR Code" className="w-full h-full object-contain" />
+src/app/admin/tools/qr-code/page.tsx:                                {selected.code && <img src={selected.code} alt="QR" className="w-16 h-16 mx-auto" />}
+src/app/admin/basecamp/roster/roster-client.tsx:            <img 
+src/app/about/page.tsx:                            <img src="/images/ui/workshop-hero.webp" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Smart Motor Auto Repair workshop interior at Musaffah M9 Abu Dhabi with professional car service equipment" />
+src/app/owner-report/ClientReport.tsx:                        <img src="/branding/logo.png" alt="Logo" className="w-4 h-4 object-contain brightness-0 invert" />
+src/app/leyla/client.tsx:                        <img src="/brands/png/porsche.png" className="h-4 w-auto" alt="Porsche" />
+src/app/leyla/client.tsx:                        <img src="/brands/png/bmw.png" className="h-4 w-auto" alt="BMW" />
+src/app/leyla/client.tsx:                        <img src="/brands/png/mercedes-benz.png" className="h-4 w-auto" alt="Mercedes" />
+src/app/new-home/brands/page.tsx:                                                            <img src={brand.logoUrl} alt={brand.name} className="w-full h-full object-contain" />
+src/app/api/og/Inter-Bold.ttf:      <img alt="" class="position-absolute" height="415" width="940" style="top: -20px; left: -20px; z-index: 1; width: 110%; height: 425px"
+src/app/api/og/Inter-Bold.ttf:      <img alt="404 &ldquo;This is not the web page you are looking for&rdquo;" class="position-absolute" height="249" width="271" style="z-index: 10; left: 72px; top: 72px"
+src/app/api/og/Inter-Bold.ttf:      <img alt="" class="position-absolute" height="230" width="188" style="top: 94px; left: 356px; z-index: 9;"
+src/app/api/og/Inter-Bold.ttf:      <img alt="" class="position-absolute" height="156" width="440" style="top: 150px; left: 432px; z-index: 8;"
+src/app/api/og/Inter-Bold.ttf:      <img alt="" class="position-absolute" height="49" width="166" style="  top: 297px; left: 371px; z-index: 7;"
+src/app/api/og/Inter-Bold.ttf:      <img alt="" class="position-absolute" height="75" width="430" style="top: 263px; left: 442px; z-index: 6;"
+src/app/api/og/Inter-Bold.ttf:      <img alt="" class="position-absolute" height="123" width="304" style="top: 73px; left: 467px; z-index: 5;"
+src/app/api/og/Inter-Bold.ttf:      <img alt="" class="position-absolute" height="50" width="116" style="top: 113px; left: 762px; z-index: 4;"
+src/app/api/og/Inter-Regular.ttf:      <img alt="" class="position-absolute" height="415" width="940" style="top: -20px; left: -20px; z-index: 1; width: 110%; height: 425px"
+src/app/api/og/Inter-Regular.ttf:      <img alt="404 &ldquo;This is not the web page you are looking for&rdquo;" class="position-absolute" height="249" width="271" style="z-index: 10; left: 72px; top: 72px"
+src/app/api/og/Inter-Regular.ttf:      <img alt="" class="position-absolute" height="230" width="188" style="top: 94px; left: 356px; z-index: 9;"
+src/app/api/og/Inter-Regular.ttf:      <img alt="" class="position-absolute" height="156" width="440" style="top: 150px; left: 432px; z-index: 8;"
+src/app/api/og/Inter-Regular.ttf:      <img alt="" class="position-absolute" height="49" width="166" style="  top: 297px; left: 371px; z-index: 7;"
+src/app/api/og/Inter-Regular.ttf:      <img alt="" class="position-absolute" height="75" width="430" style="top: 263px; left: 442px; z-index: 6;"
+src/app/api/og/Inter-Regular.ttf:      <img alt="" class="position-absolute" height="123" width="304" style="top: 73px; left: 467px; z-index: 5;"
+src/app/api/og/Inter-Regular.ttf:      <img alt="" class="position-absolute" height="50" width="116" style="top: 113px; left: 762px; z-index: 4;"
+src/app/api/og/route.tsx:            <img
+src/app/services/[id]/client.tsx:                                    <img
+src/app/extras/ceramic/client.tsx:                            <img 
+src/app/extras/ac-efficiency/client.tsx:                            <img 
+src/app/extras/repair/client.tsx:                            <img 
+src/app/extras/repair/client.tsx:                                <img 
+src/components/admin/studio/brand-editor.tsx:              <img src={logoSrc} alt={watch('name')} className="w-full h-full object-contain" />
+src/components/admin/studio/icon-picker.tsx:            <img 
+src/components/admin/studio/icon-picker.tsx:              <img 
+src/components/admin/studio/studio-layout.tsx:                  <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
+src/components/admin/social-media/planning-calendar.tsx:                    <img 
+src/components/admin/social-media/planning-calendar.tsx:                      <ImageIcon className="text-white/10 w-20 h-20" />
+src/components/admin/content/global-settings.tsx:                                                    <img src={initialData[setting.key].value} alt="preview" className="w-full h-full object-cover" />
+src/components/admin/content/global-settings.tsx:                                                    <ImageIcon className="w-5 h-5 text-gray-300" />
+src/components/admin/modals/setup-2fa-modal.tsx:                  <img src={setupData.qrCode} alt="QR Code" className="w-48 h-48" />
+src/components/admin/workbench/workbench-chat.tsx:                      <img src={file.preview} className="w-8 h-8 rounded-md object-cover" />
+src/components/admin/analytics/google-business-widget.tsx:                                                <img
+src/components/admin/analytics/google-business-widget.tsx:                                                <img src="/google-logo.svg" alt="Google" className="w-3 h-3" />
+src/components/v2/ui/blog-markdown.tsx:                            <img src={src} alt={alt} className="w-full h-auto transition-transform duration-700 group-hover:scale-105" />
+src/components/v2/sections/hero.tsx:                <Image
+src/components/v2/sections/why-smart-motor.tsx:                                <Image
+src/components/v2/sections/why-smart-motor.tsx:                                    <Image
+src/components/v2/sections/blog-post-client.tsx:                    <img
+src/components/v2/sections/blog-post-client.tsx:                                        <img
+src/components/v2/sections/services.tsx:                    <Image
+src/components/v2/sections/services.tsx:                                        <Image 
+src/components/v2/sections/advanced-logo-slider.tsx:                                            <img
+src/components/v2/sections/booking-form.tsx:                                    <img src={brand.logoUrl || `/brands-carousel/${brand.logoFile}`} alt={`${brand.name} car service booking at Smart Motor Abu Dhabi`} className="w-12 h-12 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
+src/components/v2/sections/service-packages.tsx:                                <Image 
+src/components/v2/sections/smart-tips-list.tsx:                        <img
+src/components/v2/sections/review-modal.tsx:                          <img src="/google-logo.svg" alt="Post review to Google" className="w-3 h-3 grayscale invert" />
+src/components/v2/sections/brand-carousel.tsx:                            <Image
+src/components/v2/sections/reviews-carousel.tsx:                            <img src="/google-logo.svg" alt="Google Reviews for Smart Motor Auto Repair Abu Dhabi" className="h-8 md:h-12 object-contain" />
+src/components/v2/sections/reviews-carousel.tsx:                        <img src={review.avatar} alt={`${review.author} - verified Smart Motor customer review`} className="w-full h-full object-cover opacity-90" />
+src/components/v2/sections/reviews-carousel.tsx:                                <img src="/google-logo.svg" alt="Google verified review" className="w-3 h-3" />
+src/components/v2/sections/service-detail-client.tsx:                    <img
+src/components/v2/layout/navbar.tsx:              <Image
+src/components/v2/layout/footer.tsx:                                <Image
+src/components/v2/pages/packages-page.tsx:                <img 
+src/components/design-system/PostGraphics.tsx:          <img key={file} src={`/design-system/social-graphics/${file}`} alt={file} className="max-w-full" />
+src/components/design-system/PostGraphics.tsx:          <img src="/design-system/social-graphics/before-after-sidebyside.svg" alt="Before After Side by Side" className="max-w-full rounded-lg" />
+src/components/design-system/PostGraphics.tsx:          <img src="/design-system/social-graphics/before-after-overlay.svg" alt="Before After Overlay" className="max-w-full rounded-lg" />
+src/components/design-system/PostGraphics.tsx:            <img src={`/design-system/social-graphics/${item.file}`} alt={item.file} style={{ width: item.width }} />
+src/components/design-system/PostGraphics.tsx:          <img key={file} src={`/design-system/social-graphics/${file}`} alt={file} className="max-w-full" />
+src/components/design-system/IconLibrary.tsx:              <img src={icon} alt={name} className="w-10 h-10 object-contain mb-2" loading="lazy" />
+src/components/design-system/Logos.tsx:          <img src="/design-system/branding/logo.png" alt="Light Mode Logo" className="max-w-full h-auto mb-6 relative z-10" />
+src/components/design-system/Logos.tsx:          <img src="/design-system/branding/logo.png" alt="Dark Mode Logo" className="max-w-full h-auto mb-6 relative z-10 invert brightness-0" />
+src/components/design-system/Logos.tsx:          <img src="/design-system/favicons/favicon.svg" alt="SVG Favicon" className="w-16 h-auto mb-6" />
+src/components/design-system/Sidebar.tsx:      <img 

@@ -1,12 +1,12 @@
 // src/app/api/ai/chat/route.ts
-import { getServerSession } from '@/lib/firebase-admin'
+import { verifyUserSession } from '@/lib/auth-utils'
 import { generateChatResponse } from '@/lib/ai'
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession()
-    const userId = session?.user?.id || `guest_${Date.now()}`
+    const session = await verifyUserSession()
+    const userId = session?.uid || `guest_${Date.now()}`
 
     const body = await req.json()
     const { message, attachments, conversationId, systemInstruction } = body

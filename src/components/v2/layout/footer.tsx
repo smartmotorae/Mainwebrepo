@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import {
     PhoneIcon,
     MapPinIcon,
@@ -54,52 +55,56 @@ export function Footer() {
 
                     {/* Column 1: About */}
                     <div>
-                        <Link href="/" className="inline-block mb-8">
-                            <img
-                                src={publicPath("/branding/logo.png")}
-                                alt="Smart Motor Auto Repair Musaffah Abu Dhabi - Car Service Workshop Logo"
-                                className="h-20 w-auto object-contain"
-                            />
+                        <Link href="/" className="inline-block mb-8" aria-label="Smart Motor Home">
+                            <div className="relative h-20 w-48">
+                                <Image
+                                    src={publicPath("/branding/logo.png")}
+                                    alt="Smart Motor Auto Repair Musaffah Abu Dhabi"
+                                    fill
+                                    className="object-contain"
+                                    sizes="192px"
+                                />
+                            </div>
                         </Link>
                         <p className="text-gray-400 font-medium leading-relaxed mb-8 text-sm">
                             Smart Motor Auto Repair is a professional automotive service center dedicated to delivering top-notch solutions for all your vehicle needs.
                         </p>
-                        <div className="flex flex-wrap gap-3">
+                        <nav className="flex flex-wrap gap-3" aria-label="Social Media">
                             <Tooltip content="Instagram" position="top">
-                                <TrackedLink href="https://instagram.com/smartmotor_autorepair" source="footer" medium="social" campaign="instagram" label="instagram-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
+                                <TrackedLink href="https://instagram.com/smartmotor_autorepair" aria-label="Follow us on Instagram" source="footer" medium="social" campaign="instagram" label="instagram-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
                                     <InstagramIcon size={16} />
                                 </TrackedLink>
                             </Tooltip>
                             <Tooltip content="WhatsApp" position="top">
-                                <TrackedLink href="https://wa.me/9718005445" source="footer" medium="social" campaign="whatsapp" label="whatsapp-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
+                                <TrackedLink href="https://wa.me/971525555443" aria-label="Contact us on WhatsApp" source="footer" medium="social" campaign="whatsapp" label="whatsapp-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
                                     <WhatsAppIcon size={16} />
                                 </TrackedLink>
                             </Tooltip>
                             <Tooltip content="Facebook" position="top">
-                                <TrackedLink href="https://facebook.com/smartmotorae" source="footer" medium="social" campaign="facebook" label="facebook-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
+                                <TrackedLink href="https://facebook.com/smartmotorae" aria-label="Follow us on Facebook" source="footer" medium="social" campaign="facebook" label="facebook-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
                                     <FacebookIcon size={16} />
                                 </TrackedLink>
                             </Tooltip>
                             <Tooltip content="TikTok" position="top">
-                                <TrackedLink href="https://tiktok.com/@smartmotorae" source="footer" medium="social" campaign="tiktok" label="tiktok-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
+                                <TrackedLink href="https://tiktok.com/@smartmotorae" aria-label="Follow us on TikTok" source="footer" medium="social" campaign="tiktok" label="tiktok-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
                                     <TikTokIcon size={16} />
                                 </TrackedLink>
                             </Tooltip>
                             <Tooltip content="Threads" position="top">
-                                <a href="https://threads.net/@smartmotor_autorepair" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
+                                <a href="https://threads.net/@smartmotor_autorepair" aria-label="Follow us on Threads" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
                                     <ThreadsIcon size={16} />
                                 </a>
                             </Tooltip>
                             <Tooltip content="LinkedIn" position="top">
-                                <TrackedLink href="https://ae.linkedin.com/company/smartmotorauto" source="footer" medium="social" campaign="linkedin" label="linkedin-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
+                                <TrackedLink href="https://ae.linkedin.com/company/smartmotorauto" aria-label="Follow us on LinkedIn" source="footer" medium="social" campaign="linkedin" label="linkedin-v2-footer" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-white hover:bg-white hover:text-black transition-all">
                                     <LinkedInIcon size={16} />
                                 </TrackedLink>
                             </Tooltip>
-                        </div>
+                        </nav>
                     </div>
 
                     {/* Column 2: Quick Links */}
-                    <div>
+                    <nav aria-label="Quick Links">
                         <h3 className="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-8">Quick Links</h3>
                         <ul className="space-y-4">
                             {quickLinks.map((link) => (
@@ -110,10 +115,10 @@ export function Footer() {
                                 </li>
                             ))}
                         </ul>
-                    </div>
+                    </nav>
 
                     {/* Column 3: Services */}
-                    <div>
+                    <nav aria-label="Our Services">
                         <h3 className="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-8">Our Services</h3>
                         <ul className="space-y-4">
                             {services.map((service) => (
@@ -124,7 +129,7 @@ export function Footer() {
                                 </li>
                             ))}
                         </ul>
-                    </div>
+                    </nav>
 
                     {/* Column 4: Contact */}
                     <div>
@@ -132,7 +137,9 @@ export function Footer() {
                         <ul className="space-y-6">
                             <li className="flex items-start gap-4">
                                 <Tooltip content="Visit us in Musaffah" position="left">
-                                    <MapPinIcon size={18} className="text-brand-red flex-shrink-0" />
+                                    <div aria-hidden="true">
+                                        <MapPinIcon size={18} className="text-brand-red flex-shrink-0" />
+                                    </div>
                                 </Tooltip>
                                 <span className="text-gray-400 font-medium text-sm leading-relaxed">
                                     M9, Musaffah Industrial Area,<br />
@@ -141,15 +148,19 @@ export function Footer() {
                             </li>
                             <li className="flex items-center gap-4">
                                 <Tooltip content="Call us now" position="left">
-                                    <PhoneIcon size={18} className="text-brand-red flex-shrink-0" />
+                                    <div aria-hidden="true">
+                                        <PhoneIcon size={18} className="text-brand-red flex-shrink-0" />
+                                    </div>
                                 </Tooltip>
-                                <a href="tel:+97125555443" className="text-gray-400 font-bold hover:text-brand-red transition-colors text-sm">
+                                <a href="tel:+97125555443" aria-label="Call Smart Motor at +971 2 555 5443" className="text-gray-400 font-bold hover:text-brand-red transition-colors text-sm">
                                     +971 2 555 5443
                                 </a>
                             </li>
                             <li className="flex items-center gap-4">
                                 <Tooltip content="Working hours" position="left">
-                                    <ClockIcon size={18} className="text-brand-red flex-shrink-0" />
+                                    <div aria-hidden="true">
+                                        <ClockIcon size={18} className="text-brand-red flex-shrink-0" />
+                                    </div>
                                 </Tooltip>
                                 <span className="text-gray-400 font-medium text-sm">
                                     Mon–Sat: 08:00 AM – 07:00 PM<br />
@@ -173,10 +184,10 @@ export function Footer() {
                         </div>
                     </div>
                     <div className="flex flex-col gap-4">
-                        <div className="flex gap-12 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                        <nav className="flex gap-12 text-[10px] font-black uppercase tracking-widest text-gray-400" aria-label="Legal">
                             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
                             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-                        </div>
+                        </nav>
                         <p className="text-[8px] text-gray-500 leading-relaxed">
                             This site is protected by reCAPTCHA and the Google
                             <a href="https://policies.google.com/privacy" className="hover:text-white transition-colors"> Privacy Policy</a> and

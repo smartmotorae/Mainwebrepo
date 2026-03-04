@@ -1,24 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import admin from 'firebase-admin';
-
-// Ensure Firebase Admin SDK is initialized
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-  });
-}
-
-const db = admin.firestore();
+import { adminDb } from '@/lib/firebase-admin';
+import { getUserSession } from '@/lib/session';
 
 export async function GET(req: NextRequest) {
   try {
-    const sessionCookie = (await cookies()).get('session')?.value || '';
-    const decodedClaims = await admin.auth().verifySessionCookie(sessionCookie, true);
-    const uid = decodedClaims.uid;
+    const session = await getUserSession();
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized or invalid session' }, { status: 401 });
+    }
+    const uid = session.uid;
+
+    if (!adminDb) {
+      throw new Error('Firestore DB not initialized');
+    }
 
     // Fetch bookings for the authenticated user
-    const bookingsSnapshot = await db.collection('bookings').where('userId', '==', uid).orderBy('date', 'desc').get();
+    const bookingsSnapshot = await adminDb.collection('bookings')
+      .where('userId', '==', uid)
+      .orderBy('date', 'desc')
+      .get();
+
     const bookings = bookingsSnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),
@@ -27,6 +28,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(bookings, { status: 200 });
   } catch (error: any) {
     console.error('Error fetching user bookings:', error);
-    return NextResponse.json({ error: 'Unauthorized or invalid session' }, { status: 401 });
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

@@ -83,7 +83,7 @@ export default function CustomerOverviewPage() {
             <div className="space-y-4">
               {customers.map((customer) => (
                 <div key={customer.uid} className="border p-4 rounded-lg bg-gray-50">
-                  <p className="font-black text-brand-dark flex items-center gap-2"><User className="w-4 h-4 text-gray-500" />{customer.fullName}</p>
+                  <p className="font-black text-brand-dark flex items-center gap-2"><User className="w-4 h-4 text-gray-500" />{customer.name}</p>
                   <p className="text-xs text-gray-700 flex items-center gap-2"><Mail className="w-4 h-4 text-gray-500" />{customer.email}</p>
                   {customer.phone && <p className="text-xs text-gray-700 flex items-center gap-2"><Phone className="w-4 h-4 text-gray-500" />{customer.phone}</p>}
                   <p className="text-xs text-gray-700 flex items-center gap-2"><Award className="w-4 h-4 text-gray-500" />Loyalty Tier: <span className="font-black uppercase tracking-widest text-brand-red">{customer.tier}</span> ({customer.loyaltyPoints} points)</p>

@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from '@/lib/firebase-admin'
+import { verifyUserSession } from '@/lib/auth-utils'
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession()
+    const session = await verifyUserSession()
     const { rating, text, platform } = await req.json()
 
     if (!rating || !text) {
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     }
 
     console.log(`New review received for ${platform || 'all'}:`, {
-      userId: session?.user?.id || 'guest',
+      userId: session?.uid || 'guest',
       rating,
       text
     })

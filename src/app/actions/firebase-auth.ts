@@ -1,51 +1,58 @@
 'use server'
 
-import { cookies, headers } from 'next/headers'
-import { verifySession } from '@/lib/firebase-admin'
+import { cookies } from 'next/headers'
+import { adminAuth } from '@/lib/firebase-admin'
 
+const SESSION_COOKIE_NAME = '__session'
+const MAX_AGE_SECONDS = 60 * 60 * 24 * 7 // 7 days
+
+/**
+ * Server action to set the session cookie by exchanging an ID token.
+ */
 export async function setSessionCookie(idToken: string) {
-    const cookieStore = await cookies()
+    if (!adminAuth) {
+        throw new Error('Firebase Admin Auth not initialized')
+    }
 
-    // Set the token in a secure, httpOnly cookie
-    cookieStore.set('firebase-token', idToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 60 * 60 * 24 * 5 // 5 days
-    })
-
-    // Fire login notification (non-blocking)
     try {
-        const decoded = await verifySession(idToken)
-        const headerStore = await headers()
-        const ip = headerStore.get('x-forwarded-for') || headerStore.get('x-real-ip') || 'unknown'
-        const ua = headerStore.get('user-agent') || 'unknown'
-        const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://smartmotorlatest.vercel.app'
+        // Create a session cookie
+        const sessionCookie = await adminAuth.createSessionCookie(idToken, { 
+            expiresIn: MAX_AGE_SECONDS * 1000 
+        })
 
-        fetch(`${appUrl}/api/notifications/send`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-notification-key': process.env.NOTIFICATION_SECRET || '',
-            },
-            body: JSON.stringify({
-                event: 'login',
-                data: {
-                    email: decoded?.email || 'unknown',
-                    time: new Date().toLocaleString('en-AE', { timeZone: 'Asia/Dubai' }),
-                    ip,
-                    device: ua.length > 80 ? ua.slice(0, 80) + '…' : ua,
-                },
-            }),
-        }).catch(() => {}) // Non-blocking — never fail the login
-    } catch {}
-
-    return { success: true }
+        const cookieStore = await cookies()
+        cookieStore.set(SESSION_COOKIE_NAME, sessionCookie, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: MAX_AGE_SECONDS,
+            path: '/',
+            sameSite: 'lax'
+        })
+    } catch (error: any) {
+        console.error('setSessionCookie failed:', error)
+        throw new Error('Session creation failed')
+    }
 }
 
-export async function removeSessionCookie() {
+/**
+ * Server action to sign out and revoke the session cookie.
+ */
+export async function signOut() {
     const cookieStore = await cookies()
-    cookieStore.delete('firebase-token')
-    return { success: true }
+    const sessionCookie = cookieStore.get(SESSION_COOKIE_NAME)?.value
+
+    if (sessionCookie && adminAuth) {
+        try {
+            await (adminAuth as any).revokeSessionCookies([sessionCookie])
+        } catch (error) {
+            console.warn('Error revoking session cookie on logout:', error)
+        }
+    }
+
+    cookieStore.set(SESSION_COOKIE_NAME, '', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 0,
+        path: '/',
+    })
 }

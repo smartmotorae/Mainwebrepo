@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from '@/lib/firebase-admin'
+import { getUserSession } from '@/lib/session'
 import {
   getUserMemory,
   upsertUserMemory,

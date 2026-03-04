@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { ServicePackage } from '@/types/v2'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -55,10 +56,12 @@ export function ServicePackages({ packages }: { packages: ServicePackage[] }) {
                         >
                             {/* Image Background */}
                             <div className="absolute inset-0 z-0 bg-gray-300">
-                                <img 
+                                <Image 
                                     src={pkg.image} 
                                     alt={`${pkg.title} Service Package at Smart Motor Abu Dhabi`}
-                                    className="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:scale-105 active:scale-95 transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] transition-transform duration-700 ease-out"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                    className="object-cover mix-blend-multiply opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/30 to-transparent" />
                             </div>

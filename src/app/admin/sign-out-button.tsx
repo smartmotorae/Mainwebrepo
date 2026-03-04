@@ -1,7 +1,7 @@
 'use client'
 
 import { auth } from '@/lib/firebase-client'
-import { removeSessionCookie } from '@/app/actions/firebase-auth'
+import { signOut } from '@/app/actions/firebase-auth'
 import { LogOut } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
@@ -10,8 +10,8 @@ export function SignOutButton() {
 
     const handleSignOut = async () => {
         await auth.signOut()
-        await removeSessionCookie()
-        router.push('/auth')
+        await signOut() // Use the new signOut function
+        router.push('/admin/(auth)/login') // Redirect to admin login
         router.refresh()
     }
 

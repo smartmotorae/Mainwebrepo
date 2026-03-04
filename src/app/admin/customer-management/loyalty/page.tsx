@@ -146,7 +146,7 @@ export default function LoyaltyManagementPage() {
               {customers.map((customer) => (
                 <div key={customer.uid} className="border p-4 rounded-lg bg-gray-50 flex items-center justify-between">
                   <div>
-                    <p className="font-black text-brand-dark flex items-center gap-2"><User className="w-4 h-4 text-gray-500" />{customer.fullName}</p>
+                    <p className="font-black text-brand-dark flex items-center gap-2"><User className="w-4 h-4 text-gray-500" />{customer.name}</p>
                     <p className="text-xs text-gray-700">Email: {customer.email}</p>
                     <p className={`text-xs ${getTierColor(customer.tier)} flex items-center gap-2`}><Award className="w-4 h-4 text-gray-500" />Tier: <span className="font-black uppercase tracking-widest text-brand-red">{customer.tier}</span> ({customer.loyaltyPoints} points)</p>
                   </div>
@@ -163,7 +163,7 @@ export default function LoyaltyManagementPage() {
       {isAdjustingLoyalty && selectedCustomer && (
         <Card className="bg-white rounded-lg shadow-md mb-6">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold text-brand-dark">Adjust Loyalty for {selectedCustomer.fullName}</CardTitle>
+            <CardTitle className="text-xl font-semibold text-brand-dark">Adjust Loyalty for {selectedCustomer.name}</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onLoyaltyAdjustSubmit)} className="space-y-4">

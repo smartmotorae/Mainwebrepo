@@ -14,9 +14,9 @@ export const BUSINESS = {
   phoneTel: '+97125555443',
   tollfree: '800 76278',
   tollfreeTel: '80076278',
-  whatsapp: '+971 80 05445',
-  whatsappUrl: 'https://wa.me/9718005445',
-  email: 'service@smartmotor.ae',
+  whatsapp: '+971 52 555 5443',
+  whatsappUrl: 'https://wa.me/971525555443',
+  email: 'info@smartmotor.ae',
 
   // --- Location ---
   address: 'M9, Musaffah Industrial Area, Abu Dhabi, UAE',

@@ -8,30 +8,78 @@ yarn-error.log*
 .env*.local
 .vercel
 .DS_Store
+
+# Large project folders
 Perplexity-Knowledge/
 garlic-hub/
 garlic-signage.com/
-
-# Unnecessary files for Vercel deployment
 Firebase Auth/
-"Firebase Auth"/
 Research Data - SEO/
 error-screenshots/
 audit_screenshots/
 _junk_archive/
+Next-Steps/
+Researched New/
+nanobanana-output/
+Audits/
+conductor/
+Seo-Research/
+project-docs/
+SEO_Blog_Posts/
+Contents/
+seo-backups/
+packages/
+
+# Build artifacts
 .next/
 scripts/
 .venv/
-public/design-system/social-graphics/
-"public/design-system/Icon Libraries"/
-Next-Steps/
-"Research Data - SEO"/
-Researched New/
-nanobanana-output/
+tsconfig.tsbuildinfo
+firebase-debug.log
+deployment.log
+server.log
+vercel_deploy.log
+
+# Root-level non-essential files
 *.pdf
 *.ai
-*.log
+*.png
+*.jpg
+*.jpeg
+*.zip
 *.tmp
+*.py
+*.ts
+*.js
+*.md
+!next.config.js
+!package.json
+!package-lock.json
+!tsconfig.json
+!eslint.config.mjs
+!postcss.config.mjs
+!tailwind.config.ts
+!tailwind.config.js
+!firebase.json
+!firestore.rules
+!firestore.indexes.json
+!next-env.d.ts
+
+# Specific large files in root (backup if extension ignore fails)
+brands.ai
+"brands 1.ai"
 audit_homepage_full.png
-full_site_audit.py
-research_audit.py
+ffmpeg.zip
+
+# Public directory cleanups
+public/design-system/social-graphics/
+public/design-system/Icon Libraries/
+public/design-system/Action Sample/
+public/design-system/Social Media Artwork Idea/
+public/design-system/social-graphics
+public/design-system/Icon Libraries
+public/design-system/Action Sample
+public/design-system/Social Media Artwork Idea
+
+# Session logs
+session-*.md

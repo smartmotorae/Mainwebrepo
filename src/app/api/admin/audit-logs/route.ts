@@ -1,36 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
-import admin from 'firebase-admin';
-import { cookies } from 'next/headers';
-
-// Ensure Firebase Admin SDK is initialized
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-  });
-}
-
-const db = admin.firestore();
+import { adminDb } from '@/lib/firebase-admin';
+import { getAdminSession } from '@/lib/session';
 
 export async function GET(req: NextRequest) {
   try {
-    const sessionCookie = (await cookies()).get('session')?.value || '';
-    const decodedClaims = await admin.auth().verifySessionCookie(sessionCookie, true);
+    const session = await getAdminSession();
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized: Admin access required' }, { status: 401 });
+    }
 
-    // TODO: Implement admin role check here
+    if (!adminDb) {
+      throw new Error('Firestore DB not initialized');
+    }
 
-    const snapshot = await db.collection('audit_logs').orderBy('timestamp', 'desc').limit(50).get();
+    const snapshot = await adminDb.collection('audit_logs')
+      .orderBy('timestamp', 'desc')
+      .limit(50)
+      .get();
+      
     const logs = snapshot.docs.map(doc => {
         const data = doc.data();
         return {
             id: doc.id,
             ...data,
-            timestamp: data.timestamp ? data.timestamp.toDate().toLocaleString() : 'Unknown',
+            timestamp: data.timestamp && typeof data.timestamp.toDate === 'function' 
+                ? data.timestamp.toDate().toLocaleString() 
+                : 'Unknown',
         };
     });
 
     return NextResponse.json(logs, { status: 200 });
   } catch (error: any) {
     console.error('Error fetching admin audit logs:', error);
-    return NextResponse.json({ error: 'Unauthorized or internal server error' }, { status: 401 });
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

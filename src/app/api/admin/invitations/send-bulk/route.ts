@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { adminDb, getServerSession } from '@/lib/firebase-admin'
+import { adminDb } from '@/lib/firebase-admin'
+import { verifyAdminSession } from '@/lib/auth-utils'
 import { FieldValue } from 'firebase-admin/firestore'
 import { generateSecureToken } from '@/lib/tokens'
 import { sendEmail } from '@/lib/email'
@@ -18,24 +19,19 @@ interface BulkInviteRequest {
  * POST /api/admin/invitations/send-bulk
  * Send bulk admin invitations with setup links
  *
- * Restricted to: Super admin only
+ * Restricted to: Admin only
  */
 export async function POST(request: NextRequest) {
     try {
         if (!adminDb) {
             throw new Error('Firebase Admin not initialized')
         }
-        // Check for authorization header or environment variable
-        const authHeader = request.headers.get('authorization')
-        const secretKey = process.env.ADMIN_SETUP_SECRET || ''
 
-        // Allow with proper secret or admin session
-        const session = await getServerSession()
-        const isAuthorized = authHeader === `Bearer ${secretKey}` || session?.user?.id
-
-        if (!isAuthorized) {
+        // Check for admin session
+        const session = await verifyAdminSession()
+        if (!session || session.role !== 'admin') {
             return NextResponse.json(
-                { error: 'Unauthorized' },
+                { error: 'Unauthorized: Admin access required' },
                 { status: 401 }
             )
         }

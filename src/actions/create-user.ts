@@ -1,15 +1,16 @@
 'use server'
 
-import { adminAuth, adminDb, getServerSession } from "@/lib/firebase-admin"
+import { adminAuth, adminDb } from "@/lib/firebase-admin"
+import { verifyAdminSession } from "@/lib/auth-utils"
 import { Timestamp } from "firebase-admin/firestore"
 import { createUserSchema, type CreateUserInput } from "@/lib/validations/user"
 import { revalidatePath } from "next/cache"
 
 export async function createUser(data: CreateUserInput) {
-    const session = await getServerSession()
+    const session = await verifyAdminSession()
 
     // Security: Only Admins can create users
-    if (session?.user?.role !== "ADMIN") {
+    if (!session || session.role !== "admin") {
         return {
             success: false,
             message: "Unauthorized: Only admins can create users",

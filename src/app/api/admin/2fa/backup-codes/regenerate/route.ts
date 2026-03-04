@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getAdminSession } from '@/lib/session'
+import { verifyAdminSession } from '@/lib/auth-utils'
 import { verifyTOTPCode, generateBackupCodes } from '@/lib/totp'
 import { hashMultiple, verifyHash } from '@/lib/hashing'
 import { adminDb } from '@/lib/firebase-admin'
@@ -20,8 +20,8 @@ export const maxDuration = 30
 export async function POST(req: NextRequest) {
   try {
     // Verify admin session
-    const session = await getAdminSession()
-    if (!session) {
+    const session = await verifyAdminSession()
+    if (!session || session.role !== 'admin') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

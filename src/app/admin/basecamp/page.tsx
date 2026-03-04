@@ -36,49 +36,49 @@ export default function BasecampHubPage() {
   ]
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       {/* Header */}
-      <div className="mb-10 flex items-center justify-between">
+      <div className="mb-8 md:mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-black uppercase tracking-tighter text-white">
+          <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-white">
             Base<span className="text-[#FBBF24]">camp</span>
           </h1>
-          <p className="text-xs text-white/40 font-bold uppercase tracking-[0.3em] mt-1">
+          <p className="text-[10px] md:text-xs text-white/40 font-bold uppercase tracking-[0.3em] mt-1">
             Operational Headquarters & Team Management
           </p>
         </div>
-        <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/5 rounded-2xl">
+        <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/5 rounded-2xl w-fit">
            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
            <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">HQ Online</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
         {/* Main Categories */}
-        <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {categories.map((cat) => (
             <Link
               key={cat.title}
               href={cat.href}
-              className="group relative overflow-hidden bg-brand-charcoal border border-white/[0.08] rounded-3xl p-8 hover:border-[#FBBF24]/40 transition-all duration-300"
+              className="group relative overflow-hidden bg-brand-charcoal border border-white/[0.08] rounded-3xl p-6 md:p-8 hover:border-[#FBBF24]/40 transition-all duration-300"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#FBBF24]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               
               <div className={cn(
-                "w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-xl transition-transform group-hover:scale-110 group-hover:rotate-3",
+                "w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-xl transition-transform group-hover:scale-110 group-hover:rotate-3",
                 cat.color
               )}>
-                <cat.icon className="w-7 h-7 text-white" />
+                <cat.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
               </div>
 
-              <h2 className="text-xl font-black uppercase tracking-tight text-white mb-2">
+              <h2 className="text-lg md:text-xl font-black uppercase tracking-tight text-white mb-2">
                 {cat.title}
               </h2>
-              <p className="text-sm text-white/40 leading-relaxed group-hover:text-white/60 transition-colors">
+              <p className="text-xs md:text-sm text-white/40 leading-relaxed group-hover:text-white/60 transition-colors">
                 {cat.description}
               </p>
 
-              <div className="mt-8 flex items-center text-[#FBBF24] text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+              <div className="mt-6 md:mt-8 flex items-center text-[#FBBF24] text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
                 Enter Section →
               </div>
             </Link>

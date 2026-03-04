@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getAllPublishedContent, createContent } from '@/lib/firebase-db'
-import { getServerSession } from '@/lib/firebase-admin'
+import { getAdminSession } from '@/lib/session'
 import { z } from 'zod'
-import { BlogPost } from '@/types'
+import { verifyAdminSession } from '@/lib/auth-utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -18,8 +18,8 @@ const articleSchema = z.object({
 
 export async function GET(req: Request) {
     try {
-        const session = await getServerSession()
-        if (!session || session.user.role !== 'ADMIN') {
+        const session = await verifyAdminSession()
+        if (!session || session.role !== 'admin') {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
@@ -49,8 +49,8 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
     try {
-        const session = await getServerSession()
-        if (!session || session.user.role !== 'ADMIN') {
+        const session = await verifyAdminSession()
+        if (!session || session.role !== 'admin') {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
@@ -70,7 +70,7 @@ export async function POST(req: Request) {
             title,
             slug,
             content,
-            author: session.user.name || 'Admin',
+            author: session.name || 'Admin',
             published: isPublished,
         })
 

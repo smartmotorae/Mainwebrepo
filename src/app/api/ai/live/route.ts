@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from '@/lib/firebase-admin'
+import { verifyUserSession } from '@/lib/auth-utils'
 import { createLiveSession } from '@/lib/gemini-live'
 
 export const dynamic = 'force-dynamic'
@@ -10,8 +10,8 @@ export const dynamic = 'force-dynamic'
  */
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession()
-    const userId = session?.user?.id || `public_${Date.now()}`
+    const session = await verifyUserSession()
+    const userId = session?.uid || `public_${Date.now()}`
 
     const { message, conversationId, systemPrompt, maxTokens, temperature } =
       await req.json()

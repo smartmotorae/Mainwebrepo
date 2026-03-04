@@ -1,58 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
-import admin from 'firebase-admin';
-import { cookies } from 'next/headers';
-
-// Ensure Firebase Admin SDK is initialized
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-  });
-}
-
-const db = admin.firestore();
+import { adminDb } from '@/lib/firebase-admin';
+import { getAdminSession } from '@/lib/session';
 
 export async function GET(req: NextRequest) {
   try {
-    const sessionCookie = (await cookies()).get('session')?.value || '';
-    const decodedClaims = await admin.auth().verifySessionCookie(sessionCookie, true);
+    const session = await getAdminSession();
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized: Admin access required' }, { status: 401 });
+    }
 
-    // TODO: Implement admin role check here
-    // if (!decodedClaims.admin) {
-    //   return NextResponse.json({ error: 'Unauthorized access' }, { status: 403 });
-    // }
+    if (!adminDb) {
+      throw new Error('Firestore DB not initialized');
+    }
 
     const { searchParams } = new URL(req.url);
     const searchTerm = searchParams.get('search');
-    const limit = Number(searchParams.get('limit')) || 10;
+    const limit = Math.min(Number(searchParams.get('limit')) || 10, 100);
     const offset = Number(searchParams.get('offset')) || 0;
 
-    let usersQuery: admin.firestore.Query = db.collection('users').orderBy('createdAt', 'desc');
+    let usersQuery: FirebaseFirestore.Query = adminDb.collection('users').orderBy('createdAt', 'desc');
 
     if (searchTerm) {
-      // Basic search by fullName or email (case-insensitive, starts-with)
-      // Firestore doesn't support full-text search directly, so this is a basic prefix match.
-      // For advanced search, consider a dedicated search service (e.g., Algolia, ElasticSearch).
+      // Basic search by name or email (case-insensitive, starts-with)
       const lowerSearchTerm = searchTerm.toLowerCase();
       usersQuery = usersQuery
-        .where('fullName', '>=', lowerSearchTerm)
-        .where('fullName', '<=', lowerSearchTerm + '\uf8ff')
-        .limit(limit)
-        .offset(offset);
-        // Note: For email search, you'd need a separate query or a client-side filter after fetching.
+        .where('name', '>=', lowerSearchTerm)
+        .where('name', '<=', lowerSearchTerm + '\uf8ff');
     }
     
-    // Add pagination
-    if (offset > 0) {
-        usersQuery = usersQuery.startAfter(offset)
-    }
-    usersQuery = usersQuery.limit(limit)
-
-    const snapshot = await usersQuery.get();
-    const users = snapshot.docs.map(doc => doc.data());
+    // Simple offset pagination (Note: offset is not efficient for large datasets in Firestore)
+    // But for MVP admin panel, it's usually fine.
+    const snapshot = await usersQuery.limit(limit).offset(offset).get();
+    const users = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
     return NextResponse.json(users, { status: 200 });
   } catch (error: any) {
     console.error('Error fetching admin customers:', error);
-    return NextResponse.json({ error: 'Unauthorized or internal server error' }, { status: 401 });
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

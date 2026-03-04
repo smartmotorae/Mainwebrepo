@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { MenuIcon, XIcon, PhoneIcon, UserIcon } from 'lucide-react'
 import { cn, publicPath } from '@/lib/utils'
@@ -93,18 +94,22 @@ export function Navbar() {
       )}>
         <nav className="flex items-center justify-between relative">
           {/* Logo */}
-          <Link href="/" className="flex items-center group relative z-50">
-            <img
-              src={publicPath("/branding/logo.png")}
-              alt="Smart Motor Auto Repair Abu Dhabi - Premium Car Service Center"
-              className={cn(
-                'transition-all duration-500 object-contain',
-                isScrolled ? 'h-12 md:h-14' : 'h-16 md:h-20'
-              )}
-            />
+          <Link href="/" className="flex items-center group relative z-50" aria-label="Smart Motor Home">
+            <div className={cn(
+                'relative transition-all duration-500',
+                isScrolled ? 'h-12 w-24 md:h-14 md:w-28' : 'h-16 w-32 md:h-20 md:w-40'
+              )}>
+              <Image
+                src={publicPath("/branding/logo.png")}
+                alt="Smart Motor Auto Repair Abu Dhabi"
+                fill
+                priority
+                className="object-contain"
+              />
+            </div>
           </Link>
 
-          {/* Desktop Nav - Single Row */}
+          {/* Desktop Nav - Single Row ... */}
           <div className="hidden lg:flex items-center justify-center gap-1 bg-gray-100/50 backdrop-blur-md p-1.5 rounded-full border border-white/20 mx-6 shadow-inner whitespace-nowrap">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id
@@ -138,6 +143,7 @@ export function Navbar() {
               <Tooltip content="Call us directly for immediate assistance" position="bottom">
                 <a
                   href="tel:80076278"
+                  aria-label="Call Smart Motor at 800 76278"
                   onClick={() => trackEvent('phone_click', 'Contact', 'navbar', 1)}
                   className={cn(
                     'group flex items-center gap-3 pl-1 pr-6 py-1.5 rounded-full transition-all duration-300 border shadow-sm',
@@ -176,7 +182,10 @@ export function Navbar() {
             </Button>
 
             <Tooltip content="User Dashboard" position="bottom">
-              <Link href="/user/dashboard" className={cn(
+              <Link 
+                href="/user/dashboard" 
+                aria-label="User Dashboard"
+                className={cn(
                 "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm border",
                 isScrolled 
                   ? "bg-brand-dark text-white border-white/10 hover:bg-brand-red hover:border-transparent" 
@@ -191,6 +200,7 @@ export function Navbar() {
           <Tooltip content={isMobileMenuOpen ? "Close menu" : "Open menu"} position="bottom">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               className={cn(
                 'lg:hidden p-3 rounded-full transition-colors relative z-50',
                 isScrolled || isMobileMenuOpen ? 'bg-gray-100 text-brand-dark' : 'bg-white/20 backdrop-blur-md text-brand-dark'

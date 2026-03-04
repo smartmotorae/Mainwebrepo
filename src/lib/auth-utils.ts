@@ -1,54 +1,62 @@
-import admin from 'firebase-admin';
-import { createUserProfile, createLoyaltyRecord } from '@/lib/firestore-utils';
+import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
+import { cookies } from 'next/headers'
+import { decodeSessionCookie } from './firebase-admin'
+import { getUserProfile } from './firestore-utils'
 
-// Ensure Firebase Admin SDK is initialized
-// This should ideally use environment variables in production
-// For a Next.js API route, it's generally initialized once at the entry point or in a global utility.
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-  });
+const SESSION_COOKIE_NAME = '__session'
+
+export interface SessionInfo {
+  uid: string;
+  email?: string;
+  name?: string;
+  role: 'customer' | 'admin';
 }
 
-const authAdmin = admin.auth();
+/**
+ * Generic session verification that decodes the cookie and fetches the Firestore profile.
+ */
+export async function verifySession(cookieStore?: ReadonlyRequestCookies): Promise<SessionInfo | null> {
+  const currentCookies = cookieStore || await cookies();
+  const sessionCookie = currentCookies.get(SESSION_COOKIE_NAME)?.value;
 
-export async function verifyIdToken(idToken: string): Promise<admin.auth.DecodedIdToken> {
-  return authAdmin.verifyIdToken(idToken);
-}
-
-export async function createOrUpdateUser(uid: string, email: string, displayName: string): Promise<admin.auth.UserRecord> {
-  try {
-    const userRecord = await authAdmin.getUser(uid);
-    // User exists, update display name if changed
-    if (userRecord.displayName !== displayName) {
-      await authAdmin.updateUser(uid, { displayName });
-    }
-    return userRecord;
-  } catch (error: any) {
-    if (error.code === 'auth/user-not-found') {
-      // User does not exist, create a new user
-      const newUserRecord = await authAdmin.createUser({
-        uid,
-        email,
-        displayName,
-        emailVerified: true, // Assuming tokens from Google/Apple are verified
-      });
-      // Create user profile and loyalty record in Firestore
-      await createUserProfile(uid, email, displayName);
-      await createLoyaltyRecord(uid);
-      return newUserRecord;
-    }
-    throw error;
+  if (!sessionCookie) {
+    return null;
   }
+
+  const decodedToken = await decodeSessionCookie(sessionCookie);
+  if (!decodedToken) {
+    return null;
+  }
+
+  // Get the most up-to-date role and name from Firestore
+  const profile = await getUserProfile(decodedToken.uid);
+  
+  // Custom claims on the token take precedence if available, otherwise use Firestore
+  const role = (decodedToken.role || profile?.role || 'customer') as 'customer' | 'admin';
+
+  return {
+    uid: decodedToken.uid,
+    email: decodedToken.email,
+    name: profile?.name || decodedToken.name || decodedToken.email?.split('@')[0],
+    role: role,
+  };
 }
 
-export async function createSessionCookie(idToken: string): Promise<string> {
-  // Set session expiration to 5 days. The maximum is 2 weeks.
-  const expiresIn = 60 * 60 * 24 * 5 * 1000;
-  return authAdmin.createSessionCookie(idToken, { expiresIn });
+/**
+ * Verifies the session cookie and returns user session information.
+ */
+export async function verifyUserSession(cookieStore?: ReadonlyRequestCookies): Promise<SessionInfo | null> {
+  return verifySession(cookieStore);
 }
 
-export async function revokeSessionCookie(sessionCookie: string): Promise<void> {
-  const decodedClaims = await authAdmin.verifySessionCookie(sessionCookie);
-  await authAdmin.revokeRefreshTokens(decodedClaims.sub);
+/**
+ * Verifies the session cookie and returns admin session information.
+ * Ensures the user has the 'admin' role.
+ */
+export async function verifyAdminSession(cookieStore?: ReadonlyRequestCookies): Promise<SessionInfo | null> {
+  const session = await verifySession(cookieStore);
+  if (session?.role !== 'admin') {
+    return null;
+  }
+  return session;
 }

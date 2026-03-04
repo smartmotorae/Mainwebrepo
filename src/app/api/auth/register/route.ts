@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { createUserProfile, createLoyaltyRecord } from '@/lib/firestore-utils';
-import { firebaseConfig } from '@/lib/firebase-config'; // We'll create this next
+import { firebaseConfig } from '@/lib/firebase-config';
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,13 +20,19 @@ export async function POST(req: NextRequest) {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Create user profile in Firestore
-    await createUserProfile(user.uid, user.email || email, fullName);
+    // Create user profile in Firestore (Default to 'customer')
+    await createUserProfile(user.uid, user.email || email, fullName, 'customer');
     
     // Create initial loyalty record
     await createLoyaltyRecord(user.uid);
 
-    return NextResponse.json({ message: 'User registered successfully', uid: user.uid }, { status: 200 });
+    // Return the UID. The client will then call /api/session with the ID token
+    // to establish the secure server-side session.
+    return NextResponse.json({ 
+      message: 'User registered successfully', 
+      uid: user.uid 
+    }, { status: 200 });
+
   } catch (error: any) {
     console.error('Registration error:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });

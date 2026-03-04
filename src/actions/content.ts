@@ -1,15 +1,23 @@
 'use server'
 
-import { adminDb, getServerSession } from "@/lib/firebase-admin"
+import { adminDb } from "@/lib/firebase-admin"
+import { verifyAdminSession } from "@/lib/auth-utils"
 import { revalidatePath } from "next/cache"
 import { Timestamp } from "firebase-admin/firestore"
+
+async function checkAdminSessionForContent() {
+  const session = await verifyAdminSession()
+  if (!session || session.role !== "admin" || !session.uid) {
+      throw new Error("Unauthorized: Admin access required for content actions")
+  }
+  return session.uid
+}
 
 /**
  * Updates a content block and creates an audit trail.
  */
 export async function updateContentWithAudit(key: string, newValue: string, entityType: string = 'ContentBlock') {
-  const session = await getServerSession()
-  if (!session?.user?.id) throw new Error("Unauthorized")
+  const userId = await checkAdminSessionForContent()
 
   const firestore = adminDb
   if (!firestore) throw new Error("Database not initialized")
@@ -35,7 +43,7 @@ export async function updateContentWithAudit(key: string, newValue: string, enti
       entityType,
       previousValue,
       newValue,
-      updatedBy: session.user.id,
+      updatedBy: userId,
       timestamp: Timestamp.now()
     })
   })
@@ -48,8 +56,7 @@ export async function updateContentWithAudit(key: string, newValue: string, enti
  * Creates a snapshot of the current content state for versioning.
  */
 export async function createContentSnapshot(key: string, entityType: string = 'ContentBlock', snapshotLabel?: string) {
-  const session = await getServerSession()
-  if (!session?.user?.id) throw new Error("Unauthorized")
+  const userId = await checkAdminSessionForContent()
 
   const firestore = adminDb
   if (!firestore) throw new Error("Database not initialized")
@@ -62,7 +69,7 @@ export async function createContentSnapshot(key: string, entityType: string = 'C
     entityType,
     snapshot: JSON.stringify(blockDoc.data()),
     versionLabel: snapshotLabel,
-    createdBy: session.user.id,
+    createdBy: userId,
     createdAt: Timestamp.now()
   })
 
@@ -73,8 +80,7 @@ export async function createContentSnapshot(key: string, entityType: string = 'C
  * Restores content to a previous version from history.
  */
 export async function restoreContentSnapshot(historyId: string) {
-  const session = await getServerSession()
-  if (!session?.user?.id) throw new Error("Unauthorized")
+  const userId = await checkAdminSessionForContent()
 
   const firestore = adminDb
   if (!firestore) throw new Error("Database not initialized")
@@ -107,7 +113,7 @@ export async function restoreContentSnapshot(historyId: string) {
       entityType: historyData.entityType,
       previousValue,
       newValue: snapshotData.value,
-      updatedBy: session.user.id,
+      updatedBy: userId,
       timestamp: Timestamp.now(),
       action: 'RESTORE_SNAPSHOT'
     })

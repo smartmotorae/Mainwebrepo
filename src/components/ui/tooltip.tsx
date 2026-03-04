@@ -18,6 +18,7 @@ export function Tooltip({ content, children, position = 'top', className, delay 
   const tooltipRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const tooltipId = useRef(`tooltip-${Math.random().toString(36).substr(2, 9)}`)
 
   useEffect(() => {
     setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0)
@@ -95,14 +96,16 @@ export function Tooltip({ content, children, position = 'top', className, delay 
       onMouseEnter={!isTouchDevice ? show : undefined}
       onMouseLeave={!isTouchDevice ? hide : undefined}
       onTouchStart={isTouchDevice ? handleTap : undefined}
+      aria-describedby={isVisible ? tooltipId.current : undefined}
     >
       {children}
 
       {isVisible && (
         <div
           ref={tooltipRef}
+          id={tooltipId.current}
           className={cn(
-            'absolute z-[200] pointer-events-none',
+            'absolute z-[9999] pointer-events-none',
             'animate-in fade-in-0 zoom-in-95 duration-200',
             positionClasses[actualPosition]
           )}

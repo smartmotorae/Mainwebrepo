@@ -412,9 +412,16 @@ label {
 }
 
 /* Service description text - MUST be dark on light */
+.text-gray-400,
 .text-gray-500,
 .text-gray-600 {
-  color: var(--color-text-secondary) !important;
+  color: #555555 !important; /* Darker gray for better contrast (approx 7.5:1) */
+}
+
+/* Ensure placeholder text also has enough contrast (at least 4.5:1) */
+::placeholder {
+  color: #767676 !important;
+  opacity: 1 !important;
 }
 
 /* ─── Utility Classes ─── */

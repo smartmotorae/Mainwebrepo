@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { updateContentBlock, restoreContentVersion } from '../actions/cms-actions'
 import * as firebaseDb from '../lib/firebase-db'
-import { getServerSession } from '../lib/firebase-admin'
+import { getAdminSession } from '../lib/session'
 
 vi.mock('../lib/firebase-db', () => ({
   updateContent: vi.fn().mockResolvedValue({ success: true }),
@@ -31,7 +31,7 @@ vi.mock('next/cache', () => ({
 describe('CMS Server Actions', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    ;(getServerSession as any).mockResolvedValue({
+    ;(getAdminSession as any).mockResolvedValue({
       user: { id: 'admin-1', role: 'ADMIN', name: 'Admin User' },
     })
   })

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { CallbackModal } from '@/components/sections/callback-modal'
@@ -22,9 +23,10 @@ interface HeroProps {
         isVisible?: boolean
         theme?: 'light' | 'dark' | 'glass'
     }
+    brands?: any[]
 }
 
-export function Hero({ cmsData }: HeroProps) {
+export function Hero({ cmsData, brands }: HeroProps) {
     const [isCallbackModalOpen, setIsCallbackModalOpen] = useState(false)
     const { isRTL } = useLanguage()
 
@@ -52,9 +54,13 @@ export function Hero({ cmsData }: HeroProps) {
 
             {/* Full-width vehicle image — positioned right */}
             <div className="absolute inset-0 z-0">
-                <div
-                    className="absolute inset-0 bg-cover bg-center md:bg-[center_top_0px]"
-                    style={{ backgroundImage: `url(${imageUrl})` }}
+                <Image
+                    src={imageUrl}
+                    alt="Smart Motor Auto Repair Abu Dhabi - Premium Service Center"
+                    fill
+                    priority
+                    className="object-cover object-center md:object-[center_top_0px]"
+                    sizes="100vw"
                 />
                 <div className={cn(
                     "absolute inset-0 pointer-events-none transition-all duration-700",
@@ -77,7 +83,7 @@ export function Hero({ cmsData }: HeroProps) {
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                     className="flex flex-col items-center"
                 >
-                    {/* Badge */}
+                    {/* Badge ... */}
                     <div className={cn(
                         "relative inline-flex items-center gap-2.5 px-6 py-2 rounded-full mb-8 shadow-2xl border border-white/20",
                         theme === 'dark' ? "bg-white/5 backdrop-blur-md" : "bg-white/10 backdrop-blur-md"
@@ -132,18 +138,19 @@ export function Hero({ cmsData }: HeroProps) {
                             style={callbackTilt.tiltStyle}
                             onMouseMove={callbackTilt.tiltHandlers.onMouseMove}
                             onMouseLeave={callbackTilt.tiltHandlers.onMouseLeave}
+                            aria-label="Call Smart Motor at +971 2 555 5443"
                             className="bg-white/80 backdrop-blur-md text-brand-dark button-overlay rounded-full px-10 py-4 text-xs font-black tracking-widest uppercase hover:bg-[#FFD700] hover:text-brand-dark transition-all shadow-lg border border-white/20 h-auto relative overflow-hidden group"
                             onClick={() => setIsCallbackModalOpen(true)}
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 <span className="w-2 h-2 bg-brand-red rounded-full animate-pulse" />
-                                Call: 02 555 5443
+                                Call: +971 2 555 5443
                             </span>
                             <div className="absolute inset-0 bg-[url('/public/textures/car-paint-texture.png')] opacity-20 mix-blend-overlay pointer-events-none" />
                         </Button>
                     </div>
 
-                    {/* Stats Row */}
+                    {/* Stats Row ... */}
                     <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 border-t border-b border-gray-100 py-5 mb-10 w-full max-w-2xl">
                         <Tooltip content="Serving Abu Dhabi since 2009" position="bottom">
                             <div className="text-center">
@@ -169,12 +176,12 @@ export function Hero({ cmsData }: HeroProps) {
 
                     {/* Brand Carousel Integrated */}
                     <div className="w-full mt-4">
-                        <BrandCarousel />
+                        <BrandCarousel initialBrands={brands} />
                     </div>
                 </motion.div>
             </div>
 
-            {/* Scroll Indicator */}
+            {/* Scroll Indicator ... */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-[2] opacity-50">
                 <span className="text-[8px] font-black uppercase tracking-[0.3em] text-gray-500">Scroll</span>
                 <div className="w-px h-8 bg-gradient-to-b from-gray-400 to-transparent" />

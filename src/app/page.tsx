@@ -191,7 +191,7 @@ export default async function Home() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <HomeCmsWrapper sectionId="home_hero" sectionName="Hero" initialData={heroCms}>
-                <Hero cmsData={heroCms} />
+                <Hero cmsData={heroCms} brands={brands} />
             </HomeCmsWrapper>
             <HomeCmsWrapper sectionId="home_about" sectionName="About Snippet" initialData={aboutCms}>
                 <AboutSnippet cmsData={aboutCms} />

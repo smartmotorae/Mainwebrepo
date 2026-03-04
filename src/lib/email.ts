@@ -318,7 +318,7 @@ export async function sendV2BookingConfirmation(email: string, bookingDetails: {
           <tr>
             <td style="background:#121212;border-radius:0 0 20px 20px;padding:32px 48px;text-align:center;">
               <p style="margin:0 0 8px;font-size:10px;font-weight:900;color:white;text-transform:uppercase;letter-spacing:0.3em;">Smart Motor Performance</p>
-              <p style="margin:0 0 4px;font-size:11px;color:rgba(255,255,255,0.4);">Musaffah M9, Abu Dhabi &nbsp;|&nbsp; Nadd Al Hamar, Dubai</p>
+              <p style="margin:0 0 4px;font-size:11px;color:rgba(255,255,255,0.4);">M9, Musaffah Industrial Area, Abu Dhabi, UAE</p>
             </td>
           </tr>
         </table>
@@ -413,7 +413,7 @@ export async function sendWelcomeEmail(email: string, name: string) {
         </div>
         <div class="footer">
           <p>Smart Motor Performance</p>
-          <p>Musaffah M9, Abu Dhabi | Nadd Al Hamar, Dubai</p>
+          <p>M9, Musaffah Industrial Area, Abu Dhabi, UAE</p>
           <p>© 2026 Smart Motor. All rights reserved.</p>
           <p><a href="${process.env.NEXT_PUBLIC_APP_URL}/unsubscribe">Unsubscribe</a></p>
         </div>
@@ -543,7 +543,7 @@ export async function sendNewsletterWelcomeEmail(email: string) {
           <tr>
             <td style="background:#121212;border-radius:0 0 20px 20px;padding:32px 48px;text-align:center;">
               <p style="margin:0 0 8px;font-size:10px;font-weight:900;color:white;text-transform:uppercase;letter-spacing:0.3em;">Smart Motor Performance</p>
-              <p style="margin:0 0 4px;font-size:11px;color:rgba(255,255,255,0.4);">Musaffah M9, Abu Dhabi &nbsp;|&nbsp; Nadd Al Hamar, Dubai</p>
+              <p style="margin:0 0 4px;font-size:11px;color:rgba(255,255,255,0.4);">M9, Musaffah Industrial Area, Abu Dhabi, UAE</p>
               <p style="margin:16px 0 0;font-size:10px;color:rgba(255,255,255,0.25);">
                 © 2026 Smart Motor. All rights reserved. &nbsp;•&nbsp;
                 <a href="${appUrl}/unsubscribe?email=${encodeURIComponent(email)}" style="color:rgba(255,255,255,0.3);text-decoration:underline;">Unsubscribe</a>

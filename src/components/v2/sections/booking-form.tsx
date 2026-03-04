@@ -209,45 +209,45 @@ const BookingForm = forwardRef<HTMLDivElement>((_, ref) => {
     }
 
     const renderStep1 = () => (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {Object.entries(CATEGORY_MAP).map(([catId, { title, icon: Icon }]) => {
                 const isFlipped = flippedCategory === catId
                 const catServices = groupedServices[catId] || []
                 const selectedInCat = catServices.filter(s => selectedServices.includes(s.id)).length
 
                 return (
-                    <div key={catId} className="relative h-80 perspective-1000">
+                    <div key={catId} className="relative h-72 md:h-80 perspective-1000">
                         <motion.div
                             className="w-full h-full relative preserve-3d transition-transform duration-700 cursor-pointer"
                             animate={{ rotateY: isFlipped ? 180 : 0 }}
                         >
                             <div 
-                                className="absolute inset-0 backface-hidden bg-brand-dark bg-[url('/textures/car-paint-texture.png')] bg-cover bg-blend-overlay opacity-90 rounded-3xl border border-white/10 p-8 flex flex-col items-center justify-center text-center shadow-2xl hover:border-brand-red/50 transition-all group overflow-hidden cursor-pointer"
+                                className="absolute inset-0 backface-hidden bg-brand-dark bg-[url('/textures/car-paint-texture.png')] bg-cover bg-blend-overlay opacity-90 rounded-3xl border border-white/10 p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-2xl hover:border-brand-red/50 transition-all group overflow-hidden cursor-pointer"
                                 onClick={() => setFlippedCategory(catId)}
                             >
                                 <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                    <Icon size={32} className="text-brand-red" />
+                                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                                    <Icon size={28} className="text-brand-red" />
                                 </div>
-                                <h3 className="text-white font-black text-xl uppercase tracking-tighter mb-2">{title}</h3>
-                                <p className="text-gray-400 text-sm font-medium">{catServices.length} Specialized Services</p>
+                                <h3 className="text-white font-black text-lg md:text-xl uppercase tracking-tighter mb-1 md:mb-2">{title}</h3>
+                                <p className="text-gray-400 text-[10px] md:text-sm font-medium">{catServices.length} Specialized Services</p>
                                 {selectedInCat > 0 && (
-                                    <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-brand-red text-white flex items-center justify-center text-xs font-black shadow-lg">
+                                    <div className="absolute top-4 right-4 w-7 h-7 md:w-8 md:h-8 rounded-full bg-brand-red text-white flex items-center justify-center text-[10px] md:text-xs font-black shadow-lg">
                                         {selectedInCat}
                                     </div>
                                 )}
                             </div>
-                            <div className="absolute inset-0 backface-hidden rotate-y-180 bg-[#0a0a0a] carbon-fiber rounded-3xl border border-brand-red/50 p-6 flex flex-col shadow-[0_0_30px_rgba(230,35,41,0.15)] overflow-hidden">
-                                <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
-                                    <h4 className="text-white font-black text-sm uppercase tracking-wider truncate mr-2">{title}</h4>
+                            <div className="absolute inset-0 backface-hidden rotate-y-180 bg-[#0a0a0a] carbon-fiber rounded-3xl border border-brand-red/50 p-5 md:p-6 flex flex-col shadow-[0_0_30px_rgba(230,35,41,0.15)] overflow-hidden">
+                                <div className="flex items-center justify-between mb-3 md:mb-4 border-b border-white/10 pb-3 md:pb-4">
+                                    <h4 className="text-white font-black text-[10px] md:text-sm uppercase tracking-wider truncate mr-2">{title}</h4>
                                     <button 
                                         onClick={(e) => { e.stopPropagation(); setFlippedCategory(null); }}
-                                        className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-red transition-colors flex-shrink-0"
+                                        className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-red transition-colors flex-shrink-0"
                                     >
-                                        <X size={16} />
+                                        <X size={14} />
                                     </button>
                                 </div>
-                                <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-2">
+                                <div className="flex-1 overflow-y-auto pr-1 custom-scrollbar space-y-2">
                                     {catServices.map(service => {
                                         const isSelected = selectedServices.includes(service.id)
                                         return (
@@ -255,16 +255,16 @@ const BookingForm = forwardRef<HTMLDivElement>((_, ref) => {
                                                 key={service.id}
                                                 onClick={(e) => { e.stopPropagation(); toggleService(service.id); }}
                                                 className={cn(
-                                                    "flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-all border",
+                                                    "flex items-start gap-2.5 p-2.5 rounded-xl cursor-pointer transition-all border",
                                                     isSelected ? "bg-gradient-to-r from-brand-red to-[#a01418] border-transparent text-white shadow-lg shadow-brand-red/20" : "bg-brand-dark border-white/10 text-gray-300 hover:border-white/30"
                                                 )}
                                             >
                                                 <div className={cn("mt-0.5", isSelected ? "text-white" : "text-brand-red")}>
-                                                    {isSelected ? <CheckSquare size={18} /> : <Square size={18} />}
+                                                    {isSelected ? <CheckSquare size={16} /> : <Square size={16} />}
                                                 </div>
                                                 <div>
-                                                    <p className="font-bold text-sm tracking-wide">{service.name}</p>
-                                                    <p className={cn("text-[10px] line-clamp-1 mt-1", isSelected ? "text-white/80" : "text-gray-500")}>{service.description}</p>
+                                                    <p className="font-bold text-[11px] md:text-sm tracking-wide">{service.name}</p>
+                                                    <p className={cn("text-[9px] md:text-[10px] line-clamp-1 mt-0.5", isSelected ? "text-white/80" : "text-gray-500")}>{service.description}</p>
                                                 </div>
                                             </div>
                                         )
@@ -284,37 +284,37 @@ const BookingForm = forwardRef<HTMLDivElement>((_, ref) => {
         return (
             <div className="space-y-6">
                 {!selectedBrand ? (
-                    <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
+                    <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 md:gap-4">
                         {brands.map(brand => (
-                            <div key={brand.id} onClick={() => { setValue('brand', brand.name); setExpandedBrand(brand.id); }} className="aspect-square bg-brand-dark carbon-fiber border border-white/5 rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer hover:border-brand-red/50 transition-all group">
+                            <div key={brand.id} onClick={() => { setValue('brand', brand.name); setExpandedBrand(brand.id); }} className="aspect-square bg-brand-dark carbon-fiber border border-white/5 rounded-2xl flex flex-col items-center justify-center p-3 md:p-4 cursor-pointer hover:border-brand-red/50 transition-all group">
                                 {brand.logoUrl || brand.logoFile ? (
-                                    <img src={brand.logoUrl || `/brands-carousel/${brand.logoFile}`} alt={`${brand.name} car service booking at Smart Motor Abu Dhabi`} className="w-12 h-12 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
+                                    <img src={brand.logoUrl || `/brands-carousel/${brand.logoFile}`} alt={`${brand.name} car service booking at Smart Motor Abu Dhabi`} className="w-10 h-10 md:w-12 md:h-12 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
                                 ) : (
-                                    <span className="font-black text-xs text-gray-500 group-hover:text-white uppercase tracking-wider">{brand.name.substring(0,3)}</span>
+                                    <span className="font-black text-[10px] md:text-xs text-gray-500 group-hover:text-white uppercase tracking-wider">{brand.name.substring(0,3)}</span>
                                 )}
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-brand-dark bg-[url('/textures/car-paint-texture.png')] bg-cover bg-blend-overlay border border-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden shadow-2xl">
-                        <div className="flex items-center justify-between mb-8 relative z-10">
+                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-brand-dark bg-[url('/textures/car-paint-texture.png')] bg-cover bg-blend-overlay border border-white/10 rounded-3xl p-5 md:p-8 relative overflow-hidden shadow-2xl">
+                        <div className="flex items-center justify-between mb-6 md:mb-8 relative z-10">
                             <div>
-                                <p className="text-brand-red font-black text-[10px] uppercase tracking-widest mb-1">Selected Marque</p>
-                                <h3 className="text-3xl font-black text-white uppercase italic">{selectedBrand}</h3>
+                                <p className="text-brand-red font-black text-[9px] md:text-[10px] uppercase tracking-widest mb-1">Selected Marque</p>
+                                <h3 className="text-2xl md:text-3xl font-black text-white uppercase italic">{selectedBrand}</h3>
                             </div>
-                            <button onClick={() => { setValue('brand', ''); setValue('model', ''); setValue('year', ''); setSelectedModelForYear(null); }} className="text-xs font-bold text-gray-400 hover:text-white uppercase tracking-wider border border-white/10 px-4 py-2 rounded-full">Change</button>
+                            <button onClick={() => { setValue('brand', ''); setValue('model', ''); setValue('year', ''); setSelectedModelForYear(null); }} className="text-[9px] md:text-xs font-bold text-gray-400 hover:text-white uppercase tracking-wider border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-full">Change</button>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 relative z-10">
                             {parsedModels.map((model: string) => (
                                 <div key={model} className="relative">
-                                    <div onClick={() => { setValue('model', model); setSelectedModelForYear(selectedModelForYear === model ? null : model); }} className={cn("p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between", selectedModel === model ? "bg-gradient-to-r from-brand-red to-[#a01418] border-transparent text-white" : "bg-[#0a0a0a] border border-white/10 text-gray-400")}>
-                                        <span className="font-bold uppercase tracking-wide">{model}</span>
-                                        {selectedModel === model && <CheckCircle2 size={16} className="text-brand-red" />}
+                                    <div onClick={() => { setValue('model', model); setSelectedModelForYear(selectedModelForYear === model ? null : model); }} className={cn("p-3.5 md:p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between", selectedModel === model ? "bg-gradient-to-r from-brand-red to-[#a01418] border-transparent text-white" : "bg-[#0a0a0a] border border-white/10 text-gray-400")}>
+                                        <span className="font-bold text-sm md:text-base uppercase tracking-wide">{model}</span>
+                                        {selectedModel === model && <CheckCircle2 size={14} className="text-brand-red" />}
                                     </div>
                                     <AnimatePresence>
                                         {selectedModelForYear === model && (
                                             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="mt-2">
-                                                <select {...register('year')} className="w-full bg-[#0a0a0a] border border-brand-red/50 text-white rounded-xl p-3 outline-none font-medium appearance-none" onChange={(e) => setValue('year', e.target.value, { shouldValidate: true })}>
+                                                <select {...register('year')} className="w-full bg-[#0a0a0a] border border-brand-red/50 text-white rounded-xl p-3 outline-none font-bold text-sm appearance-none" onChange={(e) => setValue('year', e.target.value, { shouldValidate: true })}>
                                                     <option value="" disabled selected>Select Make Year</option>
                                                     {years.map(y => <option key={y} value={y}>{y}</option>)}
                                                 </select>
@@ -331,26 +331,28 @@ const BookingForm = forwardRef<HTMLDivElement>((_, ref) => {
     }
 
     const renderStep3 = () => (
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8">
             <div>
-                <h4 className="text-white font-black uppercase tracking-widest text-xs mb-4">Select Date</h4>
-                <div className="flex overflow-x-auto gap-4 pb-4 hide-scrollbar snap-x scroll-smooth">
+                <h4 className="text-white font-black uppercase tracking-widest text-[10px] md:text-xs mb-4">Select Date</h4>
+                <div className="flex overflow-x-auto gap-3 md:gap-4 pb-4 hide-scrollbar snap-x scroll-smooth -mx-6 px-6 md:mx-0 md:px-0">
                     {availableDates.map(({date, capacity}, i) => {
                         const dateStr = date.toISOString().split('T')[0]
                         const isSelected = selectedDate === dateStr
                         const isFullyBooked = capacity > 98 || i === 2 || i === 5
                         const capColor = isFullyBooked ? '#555555' : getCapacityColor(capacity)
                         return (
-                            <div key={dateStr} onClick={() => !isFullyBooked && setValue('date', dateStr, { shouldValidate: true })} className={cn("flex-shrink-0 w-24 rounded-2xl p-4 transition-all snap-center flex flex-col items-center gap-2 relative border", isFullyBooked ? "bg-[#1a1a1a] border-white/5 opacity-50 cursor-not-allowed" : isSelected ? "bg-gradient-to-b from-brand-red to-[#a01418] text-white border-transparent" : "bg-brand-dark carbon-fiber text-gray-400 border border-white/10")}>
-                                <span className="text-[10px] font-black uppercase tracking-widest">{date.toLocaleDateString('en-US', { weekday: 'short' })}</span>
-                                <div className="relative w-12 h-12 flex items-center justify-center">
+                            <div key={dateStr} onClick={() => !isFullyBooked && setValue('date', dateStr, { shouldValidate: true })} className={cn("flex-shrink-0 w-20 md:w-24 rounded-2xl p-3 md:p-4 transition-all snap-center flex flex-col items-center gap-2 relative border", isFullyBooked ? "bg-[#1a1a1a] border-white/5 opacity-50 cursor-not-allowed" : isSelected ? "bg-gradient-to-b from-brand-red to-[#a01418] text-white border-transparent" : "bg-brand-dark carbon-fiber text-gray-400 border border-white/10")}>
+                                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">{date.toLocaleDateString('en-US', { weekday: 'short' })}</span>
+                                <div className="relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
                                     <svg className="absolute inset-0 w-full h-full -rotate-90">
-                                        <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-800" />
-                                        <circle cx="24" cy="24" r="22" stroke={capColor} strokeWidth="2" fill="none" strokeDasharray="138" strokeDashoffset={138 - (138 * capacity) / 100} className="transition-all duration-1000" />
+                                        <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-800 md:hidden" />
+                                        <circle cx="20" cy="20" r="18" stroke={capColor} strokeWidth="2" fill="none" strokeDasharray="113" strokeDashoffset={113 - (113 * capacity) / 100} className="transition-all duration-1000 md:hidden" />
+                                        <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-800 hidden md:block" />
+                                        <circle cx="24" cy="24" r="22" stroke={capColor} strokeWidth="2" fill="none" strokeDasharray="138" strokeDashoffset={138 - (138 * capacity) / 100} className="transition-all duration-1000 hidden md:block" />
                                     </svg>
-                                    <span className={cn("text-xl font-black", isSelected ? "text-black" : "text-white")}>{date.getDate()}</span>
+                                    <span className={cn("text-lg md:text-xl font-black", isSelected ? "text-black" : "text-white")}>{date.getDate()}</span>
                                 </div>
-                                <span className="text-[10px] font-bold uppercase tracking-widest">{date.toLocaleDateString('en-US', { month: 'short' })}</span>
+                                <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest">{date.toLocaleDateString('en-US', { month: 'short' })}</span>
                             </div>
                         )
                     })}
@@ -359,11 +361,11 @@ const BookingForm = forwardRef<HTMLDivElement>((_, ref) => {
             <AnimatePresence>
                 {selectedDate && (
                     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
-                        <h4 className="text-white font-black uppercase tracking-widest text-xs mb-4">Select Time</h4>
+                        <h4 className="text-white font-black uppercase tracking-widest text-[10px] md:text-xs mb-4">Select Time</h4>
                         {slots.length > 0 ? (
-                            <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
+                            <div className="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-3">
                                 {slots.map(time => (
-                                    <div key={time} onClick={() => setValue('time', time, { shouldValidate: true })} className={cn("py-3 px-4 rounded-xl text-center cursor-pointer font-bold text-sm tracking-widest transition-all border", selectedTime === time ? "bg-gradient-to-b from-brand-red to-[#a01418] text-white border-transparent" : "bg-brand-dark carbon-fiber text-gray-300 border border-white/10")}>
+                                    <div key={time} onClick={() => setValue('time', time, { shouldValidate: true })} className={cn("py-2.5 md:py-3 px-2 md:px-4 rounded-xl text-center cursor-pointer font-black text-xs md:text-sm tracking-widest transition-all border", selectedTime === time ? "bg-gradient-to-b from-brand-red to-[#a01418] text-white border-transparent shadow-lg" : "bg-brand-dark carbon-fiber text-gray-300 border border-white/10 hover:border-white/30")}>
                                         {time}
                                     </div>
                                 ))}
@@ -376,46 +378,46 @@ const BookingForm = forwardRef<HTMLDivElement>((_, ref) => {
     )
 
     const renderStep4 = () => (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             <div className="space-y-4">
                 <div className="space-y-1">
                     <label className="text-[10px] font-black text-white/40 uppercase tracking-widest pl-2">Full Name</label>
-                    <Input {...register('fullName')} className="h-14 bg-white/5 border border-white/10 text-white rounded-2xl focus:border-brand-red font-bold" placeholder="John Doe" />
+                    <Input {...register('fullName')} className="h-12 md:h-14 bg-white/5 border border-white/10 text-white rounded-2xl focus:border-brand-red font-bold" placeholder="John Doe" />
                     {errors.fullName && <p className="text-brand-red text-[10px] font-bold px-2">{errors.fullName.message}</p>}
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
                         <label className="text-[10px] font-black text-white/40 uppercase tracking-widest pl-2">Email</label>
-                        <Input {...register('email')} type="email" className="h-14 bg-white/5 border border-white/10 text-white rounded-2xl focus:border-brand-red font-bold" placeholder="john@example.com" />
+                        <Input {...register('email')} type="email" className="h-12 md:h-14 bg-white/5 border border-white/10 text-white rounded-2xl focus:border-brand-red font-bold" placeholder="john@example.com" />
                         {errors.email && <p className="text-brand-red text-[10px] font-bold px-2">{errors.email.message}</p>}
                     </div>
                     <div className="space-y-1">
                         <label className="text-[10px] font-black text-white/40 uppercase tracking-widest pl-2">Phone</label>
-                        <Input {...register('phone')} type="tel" className="h-14 bg-white/5 border border-white/10 text-white rounded-2xl focus:border-brand-red font-bold" placeholder="+971 50 123 4567" />
+                        <Input {...register('phone')} type="tel" className="h-12 md:h-14 bg-white/5 border border-white/10 text-white rounded-2xl focus:border-brand-red font-bold" placeholder="+971 50 123 4567" />
                         {errors.phone && <p className="text-brand-red text-[10px] font-bold px-2">{errors.phone.message}</p>}
                     </div>
                 </div>
                 <div className="space-y-1">
                     <label className="text-[10px] font-black text-white/40 uppercase tracking-widest pl-2">Notes</label>
-                    <Textarea {...register('notes')} className="bg-white/5 border border-white/10 text-white rounded-2xl focus:border-brand-red min-h-[100px] font-bold" placeholder="Optional notes..." />
+                    <Textarea {...register('notes')} className="bg-white/5 border border-white/10 text-white rounded-2xl focus:border-brand-red min-h-[80px] md:min-h-[100px] font-bold text-sm" placeholder="Optional notes (e.g., brake squeaking, AC not cooling)..." />
                 </div>
             </div>
-            <div className="bg-brand-dark bg-[url('/textures/car-paint-texture.png')] bg-cover bg-blend-overlay rounded-3xl border border-white/10 p-8 h-fit shadow-2xl relative overflow-hidden">
-                <h4 className="text-white font-black text-lg uppercase tracking-tighter italic mb-6 border-b border-white/10 pb-4">Summary</h4>
-                <div className="space-y-6">
+            <div className="bg-brand-dark bg-[url('/textures/car-paint-texture.png')] bg-cover bg-blend-overlay rounded-3xl border border-white/10 p-6 md:p-8 h-fit shadow-2xl relative overflow-hidden">
+                <h4 className="text-white font-black text-base md:text-lg uppercase tracking-tighter italic mb-4 md:mb-6 border-b border-white/10 pb-3 md:pb-4">Summary</h4>
+                <div className="space-y-5 md:space-y-6">
                     <div>
-                        <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Services ({selectedServices.length})</p>
+                        <p className="text-[9px] md:text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Services ({selectedServices.length})</p>
                         <ul className="space-y-1">
-                            {selectedServices.map(id => <li key={id} className="text-white text-sm font-medium flex items-center gap-2"><span className="w-1 h-1 bg-brand-red rounded-full" />{servicesData.find(s => s.id === id)?.name || id}</li>)}
+                            {selectedServices.map(id => <li key={id} className="text-white text-xs md:text-sm font-medium flex items-center gap-2"><span className="w-1 h-1 bg-brand-red rounded-full" />{servicesData.find(s => s.id === id)?.name || id}</li>)}
                         </ul>
                     </div>
                     <div>
-                        <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Vehicle</p>
-                        <p className="text-white text-sm font-medium">{selectedYear} {selectedBrand} {selectedModel}</p>
+                        <p className="text-[9px] md:text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Vehicle</p>
+                        <p className="text-white text-xs md:text-sm font-medium">{selectedYear} {selectedBrand} {selectedModel}</p>
                     </div>
                     <div>
-                        <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Schedule</p>
-                        <p className="text-white text-sm font-medium">{selectedDate} at {selectedTime}</p>
+                        <p className="text-[9px] md:text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Schedule</p>
+                        <p className="text-white text-xs md:text-sm font-medium">{selectedDate} at {selectedTime}</p>
                     </div>
                 </div>
             </div>

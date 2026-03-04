@@ -1,7 +1,7 @@
 'use server'
 
 import { GoogleGenerativeAI } from '@google/generative-ai'
-import { getServerSession } from '@/lib/firebase-admin'
+import { verifyAdminSession } from '@/lib/auth-utils'
 import { swarmOrchestrator } from '@/lib/ai/swarm-orchestrator'
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
@@ -12,8 +12,8 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
  * Triggers a manual refresh of the UAE Intelligence Hub via the Swarm.
  */
 export async function triggerHubRefresh() {
-    const session = await getServerSession()
-    if (!session || session.user.role !== 'ADMIN') {
+    const session = await verifyAdminSession()
+    if (!session || session.role !== 'admin') {
         throw new Error('Unauthorized')
     }
 
@@ -21,8 +21,8 @@ export async function triggerHubRefresh() {
 }
 
 export async function generateContent(prompt: string) {
-    const session = await getServerSession()
-    if (!session || session.user.role !== 'ADMIN') {
+    const session = await verifyAdminSession()
+    if (!session || session.role !== 'admin') {
         throw new Error('Unauthorized')
     }
 
@@ -43,8 +43,8 @@ export async function generateContent(prompt: string) {
  * Exports a strategic report as a high-fidelity markdown file.
  */
 export async function exportStrategyReport(content: string, title: string) {
-    const session = await getServerSession()
-    if (!session || session.user.role !== 'ADMIN') {
+    const session = await verifyAdminSession()
+    if (!session || session.role !== 'admin') {
         throw new Error('Unauthorized')
     }
 

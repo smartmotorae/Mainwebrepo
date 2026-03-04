@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server'
 import { getContent, updateContent, deleteContent } from '@/lib/firebase-db'
-import { getServerSession } from '@/lib/firebase-admin'
+import { verifyAdminSession } from '@/lib/auth-utils'
 
 export const dynamic = 'force-dynamic'
 
 export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
     try {
         const params = await props.params;
-        const session = await getServerSession()
-        if (!session || session.user.role !== 'ADMIN') {
+        const session = await verifyAdminSession()
+        if (!session || session.role !== 'admin') {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
@@ -27,8 +27,8 @@ export async function GET(req: Request, props: { params: Promise<{ id: string }>
 export async function PATCH(req: Request, props: { params: Promise<{ id: string }> }) {
     try {
         const params = await props.params;
-        const session = await getServerSession()
-        if (!session || session.user.role !== 'ADMIN') {
+        const session = await verifyAdminSession()
+        if (!session || session.role !== 'admin') {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
@@ -54,8 +54,8 @@ export async function PATCH(req: Request, props: { params: Promise<{ id: string 
 export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
     try {
         const params = await props.params;
-        const session = await getServerSession()
-        if (!session || session.user.role !== 'ADMIN') {
+        const session = await verifyAdminSession()
+        if (!session || session.role !== 'admin') {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 

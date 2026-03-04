@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from '@/lib/firebase-admin'
+import { verifyAdminSession } from '@/lib/auth-utils'
 import {
   getQRAnalyticsSummary,
   getURLAnalyticsSummary,
@@ -17,8 +17,8 @@ const analyticsQuerySchema = z.object({
 export async function GET(request: NextRequest) {
   try {
     // Check authentication (admin only)
-    const session = await getServerSession()
-    if (!session || (session.user.role as string).toUpperCase() !== 'ADMIN') {
+    const session = await verifyAdminSession()
+    if (!session || session.role !== 'admin') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

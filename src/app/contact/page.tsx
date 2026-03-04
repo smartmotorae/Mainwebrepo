@@ -7,7 +7,7 @@ import { GoogleMapView } from './contact-client'
 
 export const metadata: Metadata = {
     title: 'Contact Smart Motor Auto Repair | Musaffah, Abu Dhabi',
-    description: 'Contact Smart Motor Auto Repair in Musaffah, Abu Dhabi. Call +971 2 555 5443, WhatsApp +971 800 5445, or visit us at M9, Musaffah Industrial Area. Mon–Sat 8AM–7PM.',
+    description: 'Contact Smart Motor Auto Repair in Musaffah, Abu Dhabi. Call +971 2 555 5443, WhatsApp +971 52 555 5443, or visit us at M9, Musaffah Industrial Area. Mon–Sat 8AM–7PM.',
     openGraph: {
         title: 'Contact Smart Motor Auto Repair Abu Dhabi',
         description: 'Call, WhatsApp or visit us at M9, Musaffah Industrial Area, Abu Dhabi. Mon–Sat 8AM–7PM.',
@@ -98,7 +98,7 @@ export default function ContactPage() {
                         </div>
                         <h3 className="text-xl font-black text-brand-dark uppercase italic tracking-tight mb-4">Live WhatsApp</h3>
                         <p className="text-gray-600 text-sm font-medium mb-6">Send images or videos of your vehicle concerns directly.</p>
-                        <a href="https://wa.me/9718005445" className="bg-brand-dark text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#25D366] transition-all shadow-xl">Start Conversation</a>
+                        <a href="https://wa.me/971525555443" className="bg-brand-dark text-white px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#25D366] transition-all shadow-xl">Start Conversation</a>
                     </div>
 
                     <div className="bg-white rounded-[2.5rem] p-10 border border-black/5 shadow-precision hover:shadow-xl transition-all group text-center flex flex-col items-center">

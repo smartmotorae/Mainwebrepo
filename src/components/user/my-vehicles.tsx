@@ -155,10 +155,10 @@ export function MyVehicles() {
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-3xl p-8 border border-brand-red/20 shadow-2xl"
+          className="bg-white rounded-3xl p-5 md:p-8 border border-brand-red/20 shadow-2xl"
         >
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-black uppercase tracking-tighter italic text-brand-dark">
+            <h3 className="text-base md:text-lg font-black uppercase tracking-tighter italic text-brand-dark">
               {editingVehicleId ? 'Update Vehicle' : 'Register New Vehicle'}
             </h3>
             <button onClick={() => { setIsAdding(false); setEditingVehicleId(null); reset(); }} className="text-gray-400 hover:text-brand-red transition-colors">
@@ -167,36 +167,36 @@ export function MyVehicles() {
           </div>
 
           <form onSubmit={handleSubmit(editingVehicleId ? onEditVehicleSubmit : onAddVehicleSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1">
                 <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest pl-1">Make</label>
-                <Input {...register('make')} placeholder="e.g. Porsche" className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold" />
+                <Input {...register('make')} placeholder="e.g. Porsche" className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold text-sm" />
                 {errors.make && <p className="text-brand-red text-[9px] font-bold">{errors.make.message}</p>}
               </div>
               <div className="space-y-1">
                 <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest pl-1">Model</label>
-                <Input {...register('model')} placeholder="e.g. 911 GT3" className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold" />
+                <Input {...register('model')} placeholder="e.g. 911 GT3" className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold text-sm" />
                 {errors.model && <p className="text-brand-red text-[9px] font-bold">{errors.model.message}</p>}
               </div>
               <div className="space-y-1">
                 <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest pl-1">Year</label>
-                <Input {...register('year', { valueAsNumber: true })} type="number" placeholder="2024" className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold" />
+                <Input {...register('year', { valueAsNumber: true })} type="number" placeholder="2024" className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold text-sm" />
                 {errors.year && <p className="text-brand-red text-[9px] font-bold">{errors.year.message}</p>}
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest pl-1">License Plate</label>
-                <Input {...register('licensePlate')} placeholder="Dubai A 12345" className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold" />
+                <Input {...register('licensePlate')} placeholder="Dubai A 12345" className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold text-sm" />
               </div>
               <div className="space-y-1">
                 <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest pl-1">VIN (Optional)</label>
-                <Input {...register('vin')} placeholder="17-digit Chassis No." className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold" />
+                <Input {...register('vin')} placeholder="17-digit Chassis No." className="h-12 bg-brand-bg border-black/5 text-brand-dark rounded-xl focus:ring-1 focus:ring-brand-red/50 font-bold text-sm" />
               </div>
             </div>
 
-            <Button type="submit" variant="primary" className="w-full h-14 rounded-xl font-black text-xs uppercase tracking-widest mt-4">
+            <Button type="submit" variant="primary" className="w-full h-14 rounded-xl font-black text-[10px] md:text-xs uppercase tracking-widest mt-4">
               {editingVehicleId ? 'Update Fleet Record' : 'Register to Garage'}
             </Button>
           </form>

@@ -1,10 +1,6 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import {
   getAuth,
-  GoogleAuthProvider,
-  TwitterAuthProvider,
-  OAuthProvider,
-  signInWithPopup,
   type UserCredential,
   type AuthProvider,
 } from 'firebase/auth';
@@ -26,23 +22,13 @@ const auth = getAuth(app);
 const db = getFirestore(app, 'smartmotordb');
 const storage = getStorage(app);
 
-// ─── OAuth Providers ──────────────────────────────────────────────────────────
-
-const googleProvider = new GoogleAuthProvider();
-googleProvider.addScope('profile');
-googleProvider.addScope('email');
-
-const twitterProvider = new TwitterAuthProvider();
-
-const appleProvider = new OAuthProvider('apple.com');
-appleProvider.addScope('email');
-appleProvider.addScope('name');
-appleProvider.setCustomParameters({ response_mode: 'form_post' });
-
 // ─── signInWithProvider helper ────────────────────────────────────────────────
 
+// Note: Social providers will be re-introduced as needed by the new auth system.
+// For now, we are simplifying to focus on core email/password and session management.
 async function signInWithProvider(provider: AuthProvider): Promise<UserCredential> {
-  return signInWithPopup(auth, provider);
+  // This function will need to be re-implemented if social sign-in is desired in the new system.
+  throw new Error("Social sign-in not yet implemented in new auth system.");
 }
 
-export { app, auth, db, storage, googleProvider, twitterProvider, appleProvider, signInWithProvider };
+export { app, auth, db, storage, signInWithProvider };

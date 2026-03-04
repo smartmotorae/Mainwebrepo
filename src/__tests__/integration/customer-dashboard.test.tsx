@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import UserDashboardPage from '../../app/user/dashboard/page'
+import UserDashboardPage from '../../app/user/(app)/dashboard/page'
 
 vi.mock('next/headers', () => ({
   cookies: vi.fn(() => ({

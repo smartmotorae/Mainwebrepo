@@ -1,21 +1,23 @@
 'use server'
 
-import { updateUser as updateUserDB, getUser, createAuditLog } from "@/lib/firebase-db"
+import { updateUser as updateUserDB, createAuditLog } from "@/lib/firebase-db"
 import { revalidatePath } from "next/cache"
-import { getServerSession } from "@/lib/firebase-admin"
+import { verifyAdminSession } from "@/lib/auth-utils"
 
 type Role = "ADMIN" | "CUSTOMER" | "SUPPORT" | "EDITOR"
 
-export async function toggleUserRole(userId: string, currentRole: string) {
-    const session = await getServerSession()
-
-    // Security check: Only Admins can change roles
-    if (session?.user?.role !== "ADMIN") {
-        throw new Error("Unauthorized")
+async function checkAdminSession() {
+    const session = await verifyAdminSession()
+    if (!session || session.role !== "admin" || !session.uid) {
+        throw new Error("Unauthorized: Admin access required")
     }
+    return session
+}
 
-    const adminId = session.user.id
-    if (!adminId) throw new Error("Unauthorized: No User ID")
+export async function toggleUserRole(userId: string, currentRole: string) {
+    const session = await checkAdminSession()
+
+    const adminId = session.uid
 
     const newRole = currentRole === "ADMIN" ? "CUSTOMER" : "ADMIN"
 
@@ -35,15 +37,10 @@ export async function toggleUserRole(userId: string, currentRole: string) {
 }
 
 export async function deleteUser(userId: string) {
-    const session = await getServerSession()
-
-    // Security check
-    if (session?.user?.role !== "ADMIN" || !session?.user?.id) {
-        throw new Error("Unauthorized")
-    }
+    const session = await checkAdminSession()
 
     // Prevent admin from deleting themselves
-    if (session.user.id === userId) {
+    if (session.uid === userId) {
         throw new Error("Cannot delete your own account")
     }
 
@@ -52,7 +49,7 @@ export async function deleteUser(userId: string) {
 
     // Log the action
     await createAuditLog({
-        userId: session.user.id,
+        userId: session.uid,
         action: "DELETE_USER",
         resource: `user:${userId}`,
         details: { method: "soft_delete" }
@@ -63,11 +60,7 @@ export async function deleteUser(userId: string) {
 }
 
 export async function updateUser(userId: string, data: { name: string, email: string, role: string }) {
-    const session = await getServerSession()
-
-    if (session?.user?.role !== "ADMIN" || !session?.user?.id) {
-        throw new Error("Unauthorized")
-    }
+    const session = await checkAdminSession()
 
     const { name, email, role } = data
 
@@ -76,7 +69,7 @@ export async function updateUser(userId: string, data: { name: string, email: st
 
     // Log the action
     await createAuditLog({
-        userId: session.user.id,
+        userId: session.uid,
         action: "UPDATE_USER",
         resource: `user:${userId}`,
         details: { name, role }

@@ -249,10 +249,19 @@ function LoginContent() {
     }
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center py-12 px-6 bg-brand-bg relative overflow-hidden">
+        <div className="flex min-h-screen flex-col items-center justify-center py-12 px-6 bg-[#FAFAF9] relative overflow-hidden">
+            {/* White-washed Background Image */}
+            <div className="fixed inset-0 z-0">
+                <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-[0.08] blur-[2px]" 
+                    style={{ backgroundImage: 'url("/bg-placeholder.jpg")' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/40" />
+            </div>
+
             <div className="fixed inset-0 z-0 pointer-events-none">
-                <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-brand-red/5 blur-[120px] animate-pulse" />
-                <div className="absolute bottom-[-10%] left-[-5%] w-[800px] h-[800px] rounded-full bg-black/5 blur-[120px] animate-pulse" />
+                <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] rounded-full bg-brand-red/[0.03] blur-[120px] animate-pulse" />
+                <div className="absolute bottom-[-10%] left-[-5%] w-[800px] h-[800px] rounded-full bg-black/[0.03] blur-[120px] animate-pulse" />
             </div>
 
             <motion.div
@@ -270,11 +279,11 @@ function LoginContent() {
                     <h2 className="text-5xl font-black uppercase tracking-tighter text-brand-dark italic leading-none">
                         Smart <span className="silver-shine">Access</span>
                     </h2>
-                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">Restricted Engineering Portal</p>
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Restricted Engineering Portal</p>
                 </div>
 
-                <div className="bg-white/80 backdrop-blur-3xl p-12 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border border-white/50 text-left relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-red/50 to-transparent" />
+                <div className="bg-white/60 backdrop-blur-3xl p-12 rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] border border-white/40 text-left relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-red/30 to-transparent" />
 
                     {/* Passkey login button — shown when a passkey is registered */}
                     {hasPasskey && (
@@ -299,18 +308,18 @@ function LoginContent() {
                                 )}
                             </button>
                             <div className="flex items-center gap-3 my-6">
-                                <div className="flex-1 h-px bg-gray-100" />
-                                <span className="text-[9px] font-black text-gray-300 uppercase tracking-widest">or use password</span>
-                                <div className="flex-1 h-px bg-gray-100" />
+                                <div className="flex-1 h-px bg-gray-200/50" />
+                                <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">or use password</span>
+                                <div className="flex-1 h-px bg-gray-200/50" />
                             </div>
                         </motion.div>
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
                         <div className="space-y-3">
-                            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-500 pl-2">Security ID (Email)</label>
+                            <label className="block text-[10px] font-black uppercase tracking-widest text-brand-dark/70 pl-2">Security ID (Email)</label>
                             <div className="relative group">
-                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 flex items-center justify-center text-gray-300 group-focus-within:text-brand-red transition-colors">
+                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 flex items-center justify-center text-gray-400 group-focus-within:text-brand-red transition-colors">
                                     <Mail size={16} />
                                 </div>
                                 <input
@@ -319,16 +328,16 @@ function LoginContent() {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     autoComplete="username webauthn"
-                                    className="block w-full rounded-2xl border-0 py-5 pl-12 pr-4 text-sm font-bold bg-gray-50/50 ring-1 ring-inset ring-gray-100 focus:ring-2 focus:ring-brand-dark focus:bg-white transition-all outline-none"
+                                    className="block w-full rounded-2xl border-0 py-5 pl-12 pr-4 text-sm font-bold bg-white/50 ring-1 ring-inset ring-gray-200 focus:ring-2 focus:ring-brand-dark focus:bg-white transition-all outline-none text-brand-dark placeholder-gray-400"
                                     placeholder="admin@smartmotor.ae"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-3">
-                            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-500 pl-2">Access Key (Password)</label>
+                            <label className="block text-[10px] font-black uppercase tracking-widest text-brand-dark/70 pl-2">Access Key (Password)</label>
                             <div className="relative group">
-                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 flex items-center justify-center text-gray-300 group-focus-within:text-brand-red transition-colors">
+                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 flex items-center justify-center text-gray-400 group-focus-within:text-brand-red transition-colors">
                                     <KeyRound size={16} />
                                 </div>
                                 <input
@@ -337,7 +346,7 @@ function LoginContent() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     autoComplete="current-password webauthn"
-                                    className="block w-full rounded-2xl border-0 py-5 pl-12 pr-12 text-sm font-bold bg-gray-50/50 ring-1 ring-inset ring-gray-100 focus:ring-2 focus:ring-brand-dark focus:bg-white transition-all outline-none"
+                                    className="block w-full rounded-2xl border-0 py-5 pl-12 pr-12 text-sm font-bold bg-white/50 ring-1 ring-inset ring-gray-200 focus:ring-2 focus:ring-brand-dark focus:bg-white transition-all outline-none text-brand-dark"
                                 />
                                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand-dark transition-colors">
                                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}

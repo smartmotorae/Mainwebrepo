@@ -1,17 +1,16 @@
 import admin from 'firebase-admin'
 import { getFirestore } from 'firebase-admin/firestore'
-import { cookies } from 'next/headers'
-import fs from 'fs'
-import path from 'path'
+import * as path from 'path'
+import * as fs from 'fs'
 
+// Initialize Firebase Admin SDK (ensure this is done only once)
 if (!admin.apps.length) {
-  // Trim trailing newlines — Vercel env vars may have \n appended
   const projectId = (process.env.FIREBASE_PROJECT_ID || '').trim()
   const clientEmail = (process.env.FIREBASE_CLIENT_EMAIL || '').trim()
   const privateKey = (process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n').trim()
 
   if (!projectId || !clientEmail || !privateKey) {
-    console.error('❌ Firebase Admin: Missing required env vars or malformed private key:', {
+    console.error('❌ Firebase Admin: Missing required env vars or malformed private key.', {
       hasProjectId: !!projectId,
       hasClientEmail: !!clientEmail,
       privateKeySnippet: privateKey ? privateKey.substring(0, 10) + '...[REDACTED]' + privateKey.substring(privateKey.length - 10) : '[NOT SET]',
@@ -41,8 +40,6 @@ if (!admin.apps.length) {
     console.log('✅ Firebase Admin initialized for project:', projectId)
   } catch (initError: any) {
     console.error('❌ Firebase Admin initializeApp failed:', initError.message, initError)
-    // Optional: Re-throw to make build fail explicitly if needed
-    // throw new Error(`Firebase Admin SDK initialization failed: ${initError.message}`);
   }
 }
 
@@ -60,32 +57,21 @@ export const adminAuth = getAdminAuth()
 export const adminDb = getAdminDb()
 
 /**
- * Server-side session retrieval for both standard users AND admins.
- * Replaces NextAuth auth() function by reading manual Firebase session cookies.
+ * Server-side session cookie decoder. Decodes the session cookie and returns Firebase claims.
+ * Does NOT perform role-based authorization.
  */
-export async function getServerSession() {
-  const cookieStore = await cookies()
-  const token = cookieStore.get('firebase-token')?.value || cookieStore.get('user-token')?.value
-
-  if (!token) return null
-
+export async function decodeSessionCookie(sessionCookie: string) {
   const auth = getAdminAuth()
-  if (!auth) return null
+  if (!auth) {
+    console.error('decodeSessionCookie: Firebase Admin Auth not initialized')
+    return null
+  }
 
   try {
-    const decodedToken = await auth.verifyIdToken(token)
-    return {
-      user: {
-        id: decodedToken.uid,
-        uid: decodedToken.uid,
-        email: decodedToken.email,
-        name: decodedToken.name || decodedToken.email?.split('@')[0],
-        role: decodedToken.role === 'ADMIN' ? 'ADMIN' : 'USER',
-      },
-      expires: new Date(decodedToken.exp * 1000).toISOString(),
-    }
+    const decodedToken = await auth.verifySessionCookie(sessionCookie, true)
+    return decodedToken
   } catch (error) {
-    console.warn('getServerSession verification failed:', error)
+    console.warn('decodeSessionCookie verification failed:', error)
     return null
   }
 }
@@ -221,32 +207,6 @@ export async function adminGetContentBlock(key: string) {
   } catch (error) {
     console.error(`adminGetContentBlock error for ${key}:`, error)
     return null
-  }
-}
-
-export async function verifySession(token: string | undefined) {
-  if (!token) return null;
-
-  const auth = getAdminAuth()
-  if (!auth) {
-    console.error('verifySession: Firebase Admin Auth not initialized')
-    return null
-  }
-
-  try {
-    const decodedToken = await auth.verifyIdToken(token);
-
-    // Use only the explicit role from custom claims
-    const isAdmin = decodedToken.role === 'ADMIN';
-
-    if (!isAdmin) {
-      console.warn('Unauthorized access attempt by non-admin:', decodedToken.email);
-      return null;
-    }
-    return decodedToken;
-  } catch (error) {
-    console.error('Session verification failed:', error);
-    return null;
   }
 }
 

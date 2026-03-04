@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 const features = [
@@ -90,9 +91,14 @@ export function WhySmartMotor({ cmsData }: WhySmartMotorProps) {
                                 className={cn(
                                     "relative rounded-[2rem] overflow-hidden shadow-lg group aspect-square",
                                     (idx === 1 || idx === 3) && "mt-8 md:mt-12"
-                                )}
-                            >
-                                <img src={img.src} alt={img.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                )}>
+                                <Image
+                                    src={img.src}
+                                    alt={img.alt}
+                                    fill
+                                    sizes="(max-width: 768px) 50vw, 25vw"
+                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
                                 <div className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                                     <span className="text-white text-[10px] font-black uppercase tracking-widest bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 inline-block">
@@ -128,27 +134,24 @@ export function WhySmartMotor({ cmsData }: WhySmartMotorProps) {
                                 className="flex gap-4 items-start group"
                             >
                                 {/* Icon */}
-                                <div className="w-9 h-9 flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
-                                    <img
+                                <div className="w-9 h-9 flex-shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6 relative">
+                                    <Image
                                         src={feature.icon}
                                         alt={feature.title}
-                                        className="w-full h-full object-contain"
+                                        fill
+                                        sizes="36px"
+                                        className="object-contain"
                                         style={{ filter: RED_FILTER }}
-                                        onError={e => {
-                                            // fallback: red dot
-                                            const el = e.currentTarget.parentElement
-                                            if (el) el.innerHTML = '<div style="width:10px;height:10px;background:#E62329;border-radius:50%;margin:8px 0 0 4px"></div>'
-                                        }}
                                     />
                                 </div>
 
                                 <div>
-                                    <h4 className={cn(
+                                    <h3 className={cn(
                                         "text-[15px] font-bold group-hover:text-brand-red transition-colors leading-snug mb-0.5",
                                         theme === 'dark' ? "text-white" : "text-brand-dark"
                                     )}>
                                         {feature.title}
-                                    </h4>
+                                    </h3>
                                     <p className={cn(
                                         "text-sm leading-relaxed",
                                         theme === 'dark' ? "text-white/60" : "text-gray-600"

@@ -1,20 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getLoyaltyRecord } from '@/lib/firestore-utils';
-import { cookies } from 'next/headers';
-import admin from 'firebase-admin';
-
-// Ensure Firebase Admin SDK is initialized
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-  });
-}
+import { getUserSession } from '@/lib/session';
 
 export async function GET(req: NextRequest) {
   try {
-    const sessionCookie = (await cookies()).get('session')?.value || '';
-    const decodedClaims = await admin.auth().verifySessionCookie(sessionCookie, true);
-    const uid = decodedClaims.uid;
+    const session = await getUserSession();
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized or invalid session' }, { status: 401 });
+    }
+    const uid = session.uid;
 
     const loyaltyRecord = await getLoyaltyRecord(uid);
     if (!loyaltyRecord) {
@@ -23,6 +17,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(loyaltyRecord, { status: 200 });
   } catch (error: any) {
     console.error('Error fetching loyalty record:', error);
-    return NextResponse.json({ error: 'Unauthorized or invalid session' }, { status: 401 });
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

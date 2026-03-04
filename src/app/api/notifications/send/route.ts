@@ -7,8 +7,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { sendEmail } from '@/lib/email'
-import { verifySession } from '@/lib/firebase-admin'
-import { cookies } from 'next/headers'
+import { verifyAdminSession } from '@/lib/auth-utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -37,7 +36,7 @@ function buildNotificationEmail(event: NotificationEvent, data: Record<string, s
     weekday: 'short', day: 'numeric', month: 'short',
     hour: '2-digit', minute: '2-digit',
   })
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://smartmotorlatest.vercel.app'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://smartmotor.ae'
 
   const dataRows = customMessage
     ? `<tr><td style="padding:12px 0;border-bottom:1px solid #ECECEA;"><span style="font-size:13px;color:#444;line-height:1.6;">${customMessage}</span></td></tr>`
@@ -106,10 +105,8 @@ export async function POST(req: NextRequest) {
     const isServerCall = serverKey === (process.env.NOTIFICATION_SECRET || '')
 
     if (!isServerCall) {
-      // For admin-triggered notifications, verify session
-      const cookieStore = await cookies()
-      const token = cookieStore.get('admin-token')?.value
-      const session = await verifySession(token)
+      // For admin-triggered notifications, verify session using unified __session
+      const session = await verifyAdminSession()
       if (!session) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
       }

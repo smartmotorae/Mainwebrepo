@@ -100,3 +100,4 @@ node_modules/
 project-docs/technical/integration-credentials-smartmotor.md
 Next-Steps/export_figma_icons.py
 .vercel/
+.env*.local

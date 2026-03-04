@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { verifyAdminSession } from '@/lib/auth-utils'
 import { adminDb } from '@/lib/firebase-admin'
-import { verifySession } from '@/lib/firebase-admin'
 import { cookies } from 'next/headers'
 
 export const dynamic = 'force-dynamic'
@@ -8,10 +8,9 @@ export const dynamic = 'force-dynamic'
 // Toggle active state or delete a short URL
 export async function PATCH(req: NextRequest) {
   try {
-    const cookieStore = await cookies()
-    const token = cookieStore.get('admin-token')?.value
-    const session = await verifySession(token)
-    if (!session) {
+    // Verify admin session
+    const session = await verifyAdminSession()
+    if (!session || session.role !== 'admin') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -32,10 +31,8 @@ export async function PATCH(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const cookieStore = await cookies()
-    const token = cookieStore.get('admin-token')?.value
-    const session = await verifySession(token)
-    if (!session) {
+    const session = await verifyAdminSession()
+    if (!session || session.role !== 'admin') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

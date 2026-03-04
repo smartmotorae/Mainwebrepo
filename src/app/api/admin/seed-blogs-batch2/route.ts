@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { getServerSession, getAdminDb } from '@/lib/firebase-admin'
+import { getAdminDb } from '@/lib/firebase-admin'
+import { verifyAdminSession } from '@/lib/auth-utils'
 import admin from 'firebase-admin'
 
 export const dynamic = 'force-dynamic'
@@ -321,8 +322,8 @@ Stop the top-ups. Get a permanent fix for your BMW's oil consumption at Smart Mo
 
 export async function POST(req: Request) {
     try {
-        const session = await getServerSession()
-        if (!session || session.user.role !== 'ADMIN') {
+        const session = await verifyAdminSession()
+        if (!session || session.role !== 'admin') {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 

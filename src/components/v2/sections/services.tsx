@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Wrench, Car, Shield, Sparkles, Sun, Truck, ChevronRight, Zap, Hammer, Droplets, ChevronDown } from 'lucide-react'
 
@@ -11,62 +12,59 @@ import { useTilt } from '@/lib/hooks/useTilt'
 import Link from 'next/link'
 import { Tooltip } from '@/components/ui/tooltip'
 
-// ─── Constants ────────────────────────────────────────────────────────────────
+type Tab = 'all' | 'mechanical' | 'bodyshop' | 'ppf' | 'ceramic' | 'tinting' | 'detailing' | 'towing';
 
-// 4 columns grid → 2 rows = 8 cards visible by default
-const COLS = 4
-const DEFAULT_ROWS = 2
-const DEFAULT_VISIBLE = COLS * DEFAULT_ROWS // 8
-
-const iconMap: Record<string, typeof Wrench> = {
-    wrench: Wrench, car: Car, shield: Shield, sparkles: Sparkles,
-    sun: Sun, truck: Truck, zap: Zap,
-}
-
-const CATEGORY_MAP: Record<string, string> = {
-    mechanical: 'mechanical',
-    electrical: 'electrical',
-    bodyshop: 'bodyshop',
-    body: 'bodyshop',
-    ppf: 'carcare',
-    ceramic: 'carcare',
-    tinting: 'carcare',
-    detailing: 'carcare',
-    towing: 'carcare',
-    carcare: 'carcare',
-    general: 'carcare',
-}
-
-type Tab = 'all' | 'mechanical' | 'electrical' | 'bodyshop' | 'carcare'
-
-const TABS: { id: Tab; label: string; labelAr: string; Icon: React.ComponentType<{ size?: number }> }[] = [
-    { id: 'all', label: 'All', labelAr: 'الكل', Icon: Sparkles },
-    { id: 'mechanical', label: 'Mechanical', labelAr: 'الميكانيكا', Icon: Wrench },
-    { id: 'electrical', label: 'Electrical', labelAr: 'الكهرباء', Icon: Zap },
-    { id: 'bodyshop', label: 'Body Shop', labelAr: 'ورشة الهيكل', Icon: Hammer },
-    { id: 'carcare', label: 'Car Care', labelAr: 'العناية بالسيارة', Icon: Droplets },
-]
-
-function getTab(service: Service): string {
-    return CATEGORY_MAP[(service.category || '').toLowerCase()] || 'carcare'
-}
+const iconMap: { [key: string]: React.ElementType } = {
+    Wrench,
+    Car,
+    Shield,
+    Sparkles,
+    Sun,
+    Truck,
+    Zap,
+    Hammer,
+    Droplets,
+};
 
 function getCategoryImage(service: Service): string {
-    const fallbacks: Record<string, string> = {
+    const category = service.category?.toLowerCase() || 'general';
+    const categoryImageMap: { [key: string]: string } = {
         mechanical: '/images/services/mechanical.jpg',
         electrical: '/images/services/electrical.jpg',
-        bodyshop: '/images/services/bodyshop.jpg',
-        carcare: '/images/services/carcare.jpg',
-    }
-    return service.image || fallbacks[getTab(service)] || fallbacks.mechanical
+        'body-paint': '/images/services/body-paint.jpg',
+        detailing: '/images/services/detailing.jpg',
+        performance: '/images/services/performance.jpg',
+        general: '/images/services/general.jpg',
+    };
+    return categoryImageMap[category] || categoryImageMap.general;
 }
 
-// ─── Service Card ─────────────────────────────────────────────────────────────
+const DEFAULT_VISIBLE = 8
+
+const TABS: { id: Tab; label: string; labelAr: string; Icon: React.ElementType }[] = [
+    { id: 'all', label: 'All Services', labelAr: 'جميع الخدمات', Icon: Sparkles },
+    { id: 'mechanical', label: 'Mechanical', labelAr: 'ميكانيكي', Icon: Wrench },
+    { id: 'bodyshop', label: 'Body & Paint', labelAr: 'الهيكل والطلاء', Icon: Car },
+    { id: 'ppf', label: 'PPF', labelAr: 'حماية الطلاء (PPF)', Icon: Shield },
+    { id: 'ceramic', label: 'Ceramic Coating', labelAr: 'طلاء السيراميك', Icon: Droplets },
+    { id: 'tinting', label: 'Window Tinting', labelAr: 'تظليل النوافذ', Icon: Sun },
+    { id: 'detailing', label: 'Detailing', labelAr: 'التفصيل', Icon: Sparkles },
+    { id: 'towing', label: 'Towing', labelAr: 'القطر', Icon: Truck },
+];
+
+const getTab = (service: Service): Tab => {
+    const category = service.category?.toLowerCase();
+    if (category && TABS.some(tab => tab.id === category)) {
+        return category as Tab;
+    }
+    return 'all';
+}
 
 function ServiceCard({ service, index }: { service: Service; index: number }) {
     const { language, isRTL } = useLanguage()
     const Icon = iconMap[service.icon] || Wrench
     const tilt = useTilt({ maxDegrees: 5 })
+    const [imgError, setImgError] = useState(false)
 
     return (
         <motion.div
@@ -82,11 +80,13 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
             >
                 {/* BG image */}
                 <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
-                        <img
-                        src={getCategoryImage(service)}
+                    <Image
+                        src={imgError ? '/images/services/mechanical.jpg' : getCategoryImage(service)}
                         alt={`${service.name} at Smart Motor Auto Repair Abu Dhabi`}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        onError={e => { (e.currentTarget as HTMLImageElement).src = '/images/services/mechanical.jpg' }}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={() => setImgError(true)}
                     />
                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
                 </div>
@@ -97,7 +97,15 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                         <Tooltip content={service.name} position="right">
                             <div className="w-13 h-13 w-12 h-12 bg-brand-red/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-brand-red border border-brand-red/20 group-hover:bg-brand-red group-hover:text-white transition-all duration-500 shadow-lg p-2">
                                 {service.iconImage
-                                    ? <img src={publicPath(service.iconImage)} alt={`${service.name} icon - Smart Motor Abu Dhabi`} className="w-full h-full object-contain drop-shadow-md group-hover:brightness-0 group-hover:invert transition-all" />
+                                    ? <div className="relative w-full h-full">
+                                        <Image 
+                                            src={publicPath(service.iconImage)} 
+                                            alt={`${service.name} icon - Smart Motor Abu Dhabi`} 
+                                            fill
+                                            sizes="48px"
+                                            className="object-contain drop-shadow-md group-hover:brightness-0 group-hover:invert transition-all" 
+                                        />
+                                      </div>
                                     : <Icon size={20} />}
                             </div>
                         </Tooltip>

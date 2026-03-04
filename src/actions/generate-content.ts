@@ -1,7 +1,8 @@
 'use server'
 
 import { GoogleGenerativeAI } from "@google/generative-ai"
-import { getServerSession, adminDb } from "@/lib/firebase-admin"
+import { adminDb } from "@/lib/firebase-admin"
+import { verifyAdminSession } from "@/lib/auth-utils"
 import { checkRateLimit, incrementRateLimit } from "@/lib/rate-limit"
 import { Timestamp } from "firebase-admin/firestore"
 
@@ -15,13 +16,13 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
  * @returns Result object with success status and generated content.
  */
 export async function generateContent(formData: FormData) {
-    const session = await getServerSession()
+    const session = await verifyAdminSession()
 
-    if (!session?.user?.id || session?.user?.role !== "ADMIN") {
+    if (!session || session.role !== "admin") {
         return { success: false, message: "Unauthorized", content: "" }
     }
 
-    const userId = session.user.id
+    const userId = session.uid
     const canProceed = await checkRateLimit(userId, "GENERATE_ARTICLE", 10, 3600)
     
     if (!canProceed) {

@@ -169,7 +169,7 @@ export function generateAdminInvitationEmail(
                         <td style="background:#121212;border-radius:0 0 24px 24px;padding:40px 48px;text-align:center;">
                             <p style="margin:0 0 12px;font-size:11px;font-weight:900;color:white;text-transform:uppercase;letter-spacing:0.3em;">${companyName}</p>
                             <p style="margin:0 0 4px;font-size:10px;color:rgba(255,255,255,0.5);">Business Intelligence - Marketing Division</p>
-                            <p style="margin:0 0 16px;font-size:10px;color:rgba(255,255,255,0.4);">Musaffah M9, Abu Dhabi | Nadd Al Hamar, Dubai</p>
+                            <p style="margin:0 0 16px;font-size:10px;color:rgba(255,255,255,0.4);">M9, Musaffah Industrial Area, Abu Dhabi, UAE</p>
                             <p style="margin:0 0 8px;font-size:10px;color:rgba(255,255,255,0.4);">📞 +971 2 555 5443 | 🌐 smartmotor.ae</p>
                             <hr style="border:none;border-top:1px solid rgba(255,255,255,0.1);margin:16px 0;" />
                             <p style="margin:0;font-size:9px;color:rgba(255,255,255,0.25);">

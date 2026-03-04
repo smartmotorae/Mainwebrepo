@@ -16,19 +16,19 @@ import {
 } from "@/lib/firebase-db"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
-import { getServerSession } from "@/lib/firebase-admin"
+import { verifyAdminSession } from "@/lib/auth-utils"
 
 async function checkAdmin() {
-    const session = await getServerSession()
-    if (session?.user?.role !== "ADMIN" || !session?.user?.id) {
-        throw new Error("Unauthorized")
+    const session = await verifyAdminSession()
+    if (!session || session.role !== "admin" || !session.uid) {
+        redirect("/admin/(auth)/login") // Redirect to admin login if not authenticated or not admin
     }
-    return session
+    return { user: { id: session.uid, name: session.name, email: session.email, role: session.role } } // Normalize session to match old structure for now
 }
 
 export async function updateContentBlock(formData: FormData) {
     const session = await checkAdmin()
-    const adminId = session.user.id!
+    const adminId = session.user.id
     const adminName = session.user.name || session.user.email || "Unknown Admin"
 
     const key = formData.get("key") as string
@@ -107,7 +107,7 @@ export async function restoreContentVersion(historyId: string) {
         }
 
         await createAuditLog({
-            userId: session.user.id!,
+            userId: session.user.id,
             action: "RESTORE_CONTENT",
             resource: `${entityType.toLowerCase()}:${entityId}`,
             details: { historyId }
@@ -141,7 +141,7 @@ export async function updateServiceAction(id: string, data: any) {
 
     // 3. Log the audit trail
     await createAuditLog({
-        userId: session.user.id!,
+        userId: session.user.id,
         action: "UPDATE_SERVICE",
         resource: `service:${id}`,
         details: data
@@ -173,7 +173,7 @@ export async function updateBrandAction(id: string, data: any) {
 
     // 3. Log the audit trail
     await createAuditLog({
-        userId: session.user.id!,
+        userId: session.user.id,
         action: "UPDATE_BRAND",
         resource: `brand:${id}`,
         details: data
@@ -253,7 +253,7 @@ export async function createServiceAction(data: any) {
 
         // 3. Log the audit trail
         await createAuditLog({
-            userId: session.user.id!,
+            userId: session.user.id,
             action: "CREATE_SERVICE",
             resource: `service:${id}`,
             details: data
